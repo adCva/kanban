@@ -1,1 +1,46 @@
-/*# sourceMappingURL=style.css.map */
+.sidebar-wrapper .sidebar-logo {
+  background-image: url("../Assets/logo-mobile.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+}
+.sidebar-wrapper .sidebar-interactive-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.sidebar-wrapper .sidebar-interactive-wrapper .sidebar-interactive-container {
+  background-color: red;
+  z-index: 999;
+}
+.sidebar-wrapper .sidebar-interactive-wrapper-hide {
+  all: unset;
+  display: none;
+}
+
+.App {
+  height: 100vh;
+  height: 100dvh;
+  transition: all 0.3s ease-in-out;
+}
+@media (min-width: 768px) {
+  .App {
+    display: grid;
+    grid-template-columns: 30% 70%;
+  }
+}
+.App .left {
+  background-color: red;
+}
+.App .right {
+  background-color: blue;
+}/*# sourceMappingURL=style.css.map */
