@@ -35,9 +35,11 @@ function Sidebar() {
     return (
         <div className='sidebar-wrapper'>
 
-            <img alt="" className='sidebar-logo' />
+            <div className='mobile-logo'>
+                <img alt="" className='sidebar-logo' />
 
-            <button className='mobile-btn' onClick={openMobileMenu}>{mobileMenuOpened ? <BiChevronUp /> : <BiChevronDown />}</button>
+                <button className='mobile-btn' onClick={openMobileMenu}>{mobileMenuOpened ? <BiChevronUp /> : <BiChevronDown />}</button>
+            </div>
 
             {transition((style, mobileMenuOpened) => mobileMenuOpened ? (
                 <animated.div style={style} className="sidebar-interactive-wrapper">
@@ -54,6 +56,11 @@ function Sidebar() {
                     </div>
                 </animated.div>
             ) : null)}
+
+            <div className='mobile-right'>
+                <button>+</button>
+                <button>Dots</button>
+            </div>
 
         </div>
     )

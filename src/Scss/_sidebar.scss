@@ -1,17 +1,78 @@
 .sidebar-wrapper {
-    .sidebar-logo {
-        background-image: url("../Assets/logo-mobile.svg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 50px;
-        height: 50px;
+    background-color: $lt-main-bg;
+
+    // ========================= Logo Container
+    .sidebar-logo-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+
+        // ====== Left sub-container.
+        .logo-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            .logo {
+                background: url("../Assets/logo-mobile.svg") center/cover no-repeat;
+                width: 30px;
+                height: 30px;
+
+                @media (min-width: 768px) {
+                    background: url("../Assets/logo-light.svg") center/cover no-repeat;
+                    width: 180px;
+                    height: 30px;
+                }
+            }
+
+            button {
+                background: transparent;
+                color: #635fc7;
+                font-size: 1.3rem;
+                cursor: pointer;
+
+                @media (min-width: 1000px) {
+                    display: none;
+                }
+            }
+        }
+
+        // ====== Right sub-container.
+        .logo-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            @media (min-width: 1000px) {
+                display: none;
+            }
+
+            .add {
+                background: #cdcfef;
+                color: $lt-main-bg;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.3rem;
+                padding: 0.25rem 0.6rem;
+                border-radius: 50px;
+                cursor: pointer;
+            }
+
+            .dots {
+                background: transparent;
+                color: darken($lt-text-light, 20%);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
     }
 
-
-    .mobile-btn {}
-
-    .sidebar-interactive-wrapper {
+    // ========================= Content Wrapper
+    .sidebar-content-wrapper {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -22,8 +83,151 @@
         align-items: center;
         background-color: rgba(0, 0, 0, 0.5);
 
-        .sidebar-interactive-container {
-            background-color: red;
+        @media (min-width: 1000px) {
+            position: initial;
+            background: none;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .sidebar-content-container {
+            background-color: $lt-sidebar-bg;
+            min-width: 250px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;;
+            padding: 1rem;
+            border-radius: 10px;
+
+            @media (min-width: 1000px) {
+                all: unset;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 1rem;
+                height: calc(100vh - (4rem + 30px));
+            }
+
+
+            .active-boards-container {
+                display: grid;
+                overflow-y: auto;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                cite {
+                    font-size: 0.9rem;
+                    font-weight: $font-semiBold;
+                    text-transform: uppercase;
+                    color: $lt-gray;
+                    margin-bottom: 2rem;
+                }
+
+
+                .existing-boards {
+                    display: grid;
+                    justify-items: start;
+                    gap: 0.5rem;
+                    margin-bottom: 1rem;
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    max-height: 300px;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                    @media (min-width: 1000px) {
+                        max-height: 100%;
+                    }
+                    
+
+                    button {
+                        background: transparent;
+                        color: $lt-gray;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        font-weight: $font-semiBold;
+                        cursor: pointer;
+                    }
+                }
+
+                .create-board {
+                    background: transparent;
+                    color: $lt-purple;
+                    font-weight: $font-bold;
+                    text-align: left;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    cursor: pointer;
+                }
+            }
+
+
+            .theme-btn-wrapper {
+                display: grid;
+                justify-items: start;
+                gap: 1rem;
+
+                .theme-btn-container {
+                    background: lighten($lt-purple-fade, 5%);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 0.7rem;
+                    border-radius: 10px;
+                    width: 100%;
+    
+                    dfn {
+                        color: $lt-gray;
+                    }
+    
+                    .theme-switcher {
+                        display: inline-block;
+                        position: relative;
+                        width: 40px;
+                        height: 20px;
+                        background: $lt-purple;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: all 0.3s ease-in-out;
+    
+                        .theme-btn {
+                            position: absolute;
+                            left: 3px;
+                            top: 3px;
+                            width: 14px;
+                            height: 14px;
+                            background: $lt-sidebar-bg;
+                            border-radius: 50%;
+                            transition: all 0.3s ease-in-out;
+                        }
+    
+                        .theme-btn-right {
+                            left: 22px;
+                        }
+                    }
+                }
+
+
+                .hide-sidebar-btn {
+                    background: transparent;
+                    color: $lt-gray;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-weight: $font-semiBold;
+                    cursor: pointer;
+                }
+            }
+
         }
     }
 }

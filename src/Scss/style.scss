@@ -6,18 +6,15 @@
     height: 100vh;
     height: 100dvh;
     transition: all 0.3s ease-in-out;
+    background-color: $lt-borders;
 
-    @media (min-width: 768px) {
+    @media (min-width: 1000px) {
         display: grid;
-        grid-template-columns: 30% 70%;
+        grid-template-columns: 25% 75%;
     }
 
-
-    .left {
-        background-color: red;
-    }
-
-    .right {
-        background-color: blue;
+    @media (min-width: 1300px) {
+        display: grid;
+        grid-template-columns: 15% 85%;
     }
 }
