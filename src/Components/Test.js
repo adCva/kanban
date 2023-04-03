@@ -79,11 +79,11 @@ function Test() {
             <div className='active-boards-container'>
               <cite>All Boards (0)</cite>
               <div className='existing-boards'>
-                <button><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
+                <button className='active-board'><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
                 <button><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
                 <button><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
               </div>
-              <button className='create-board'><span><MdOutlineSpaceDashboard /></span> +Create New Board</button>
+              <button className='create-board'><span><MdOutlineSpaceDashboard /></span> + Create New Board</button>
             </div>
 
             <div className='theme-btn-wrapper'>

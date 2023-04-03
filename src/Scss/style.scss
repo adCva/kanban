@@ -1,5 +1,5 @@
 @import "config";
-@import "sidebar";
+@import "test";
 
 
 .App {
@@ -16,5 +16,14 @@
     @media (min-width: 1300px) {
         display: grid;
         grid-template-columns: 15% 85%;
+    }
+
+
+    .right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        background-color: $lt-borders;
     }
 }

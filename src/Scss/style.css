@@ -85,8 +85,8 @@
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container {
   background-color: #ffffff;
-  min-width: 250px;
-  min-height: 300px;
+  min-width: 300px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -108,22 +108,24 @@
   display: grid;
   overflow-y: auto;
   scrollbar-width: none;
+  margin-left: -1rem;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container::-webkit-scrollbar {
   display: none;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container cite {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: #818ea2;
   margin-bottom: 2rem;
+  padding-left: 1rem;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .existing-boards {
   display: grid;
   justify-items: start;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
   overflow-y: auto;
   scrollbar-width: none;
   max-height: 300px;
@@ -142,36 +144,63 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
+  padding-left: 1rem;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .existing-boards button span {
+  font-size: 1.3rem;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .existing-boards .active-board {
+  background-color: #6460c7;
+  color: #f2f6fd;
+  padding: 0.7rem 2rem 0.7rem 1rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .create-board {
   background: transparent;
   color: #635fc7;
+  font-size: 1.1rem;
   font-weight: 700;
   text-align: left;
+  letter-spacing: -0.3px;
   display: flex;
-  align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  padding-left: 1rem;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .create-board span {
+  font-size: 1.3rem;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper {
   display: grid;
   justify-items: start;
   gap: 1rem;
+  margin-top: 2rem;
+}
+@media (min-width: 1000px) {
+  .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper {
+    margin-bottom: 1.5rem;
+  }
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .theme-btn-container {
   background: #e9e9f7;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 0.7rem;
+  gap: 1.35rem;
+  padding: 0.9rem 0;
   border-radius: 10px;
   width: 100%;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .theme-btn-container dfn {
+  background: transparent;
   color: #818ea2;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .theme-btn-container dfn:first-of-type {
+  font-size: 1.2rem;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .theme-btn-container .theme-switcher {
   display: inline-block;
@@ -199,11 +228,23 @@
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .hide-sidebar-btn {
   background: transparent;
   color: #818ea2;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-top: 0.2rem;
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .hide-sidebar-btn:hover {
+  color: #505b6d;
+}
+@media (min-width: 1000px) {
+  .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .hide-sidebar-btn {
+    display: flex;
+  }
 }
 
 .App {
@@ -223,4 +264,11 @@
     display: grid;
     grid-template-columns: 15% 85%;
   }
+}
+.App .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #e5ecfa;
 }/*# sourceMappingURL=style.css.map */
