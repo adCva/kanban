@@ -1,0 +1,44 @@
+.add-task-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .add-task-container {
+        background-color: $lt-sidebar-bg;
+        min-width: 300px;
+        min-height: 400px;
+        padding: 1rem;
+        border-radius: 10px;
+
+
+        h1 {
+
+        }
+
+        .add-form {
+            display: grid;
+
+            .form-group {
+                display: grid;
+
+
+                .show-error-msg {
+                    color: red;
+                    transition: $transition;
+                    transform: scale(1);
+                    transform-origin: left;
+                }
+
+                .hide-error-msg {
+                    transform: scale(0);
+                }
+            }
+        }
+    }
+}

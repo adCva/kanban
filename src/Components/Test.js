@@ -79,9 +79,9 @@ function Test() {
             <div className='active-boards-container'>
               <cite>All Boards (0)</cite>
               <div className='existing-boards'>
-                <button className='active-board'><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
-                <button><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
-                <button><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
+                <button className='active-board' draggable><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
+                <button draggable><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
+                <button draggable><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
               </div>
               <button className='create-board'><span><MdOutlineSpaceDashboard /></span> + Create New Board</button>
             </div>

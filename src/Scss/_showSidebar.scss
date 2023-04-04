@@ -1,0 +1,23 @@
+.show-sidebar-container {
+    background-color: $lt-purple;
+    color: $lt-sidebar-bg;
+    display: none;
+    padding: 0.8rem 1rem 0.8rem 1.3rem;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+        background-color: lighten($lt-purple, 5%);
+    }
+
+
+    @media (min-width: 1000px) {
+        display: inline-block;
+        position: fixed;
+        bottom: 4.5rem;
+        left: 0;
+    }
+}

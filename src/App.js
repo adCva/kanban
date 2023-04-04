@@ -1,3 +1,5 @@
+import AddTask from './Components/AddTask';
+import ShowSidebar from './Components/ShowSidebar';
 import Sidebar from './Components/Sidebar';
 import Test from './Components/Test';
 import './Reset.css';
@@ -8,9 +10,11 @@ function App() {
     <div className="App">
       <div className='left'>
         <Test />
+        
       </div>
       <div className='right'>
-        Test #2
+        <ShowSidebar />
+        <AddTask />
       </div>
     </div>
   );
