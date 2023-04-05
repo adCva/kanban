@@ -1,0 +1,66 @@
+.tasks-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    // ======================= Top bar container.
+    .topbar-container {
+        background-color: red;
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+
+        @media (min-width: 1000px) {
+            display: flex;
+        }
+
+        h1 {
+            
+        }
+
+        .topbar-interactive {
+            display: flex;
+            align-items: center;
+
+
+            .dropdown-wrapper {
+                position: relative;
+            }
+        }
+    }
+
+    // ======================= Tasks container.
+    .tasks-container {
+        padding: 1rem;
+        flex-grow: 1;
+
+        @media (min-width: 1000px) {
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+            grid-auto-rows: auto;
+            gap: 2rem;
+        }
+
+
+        .status-group {
+            .status-cards-container {
+                display: grid;
+                gap: 1rem;
+                max-height: none;
+                transition: $transition;
+
+                .task-card {
+                    background-color: blue;
+                    padding: 1rem;
+                    border-radius: 10px;
+                }
+            }
+
+            .status-cards-container-hide {
+                max-height: 0;
+                overflow: hidden;
+                transition: $transition;
+            }
+        }
+    }
+}

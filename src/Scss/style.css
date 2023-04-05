@@ -304,11 +304,143 @@
   transform: scale(0);
 }
 
+.edit-task-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.edit-task-wrapper .edit-task-container {
+  background-color: #ffffff;
+  min-width: 300px;
+  min-height: 400px;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.edit-task-wrapper .edit-task-container .edit-form {
+  display: grid;
+}
+.edit-task-wrapper .edit-task-container .edit-form .form-group {
+  display: grid;
+}
+.edit-task-wrapper .edit-task-container .edit-form .form-group .show-error-msg {
+  color: red;
+  transition: all 0.25s ease-in-out;
+  transform: scale(1);
+  transform-origin: left;
+}
+.edit-task-wrapper .edit-task-container .edit-form .form-group .hide-error-msg {
+  transform: scale(0);
+}
+
+.task-details-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.task-details-wrapper .task-details-container {
+  background-color: #ffffff;
+  min-width: 300px;
+  min-height: 400px;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.dropdown-wrapper .dropdown-container {
+  transform: scale(1, 1);
+  display: grid;
+  background-color: red;
+  transform-origin: top;
+  transition: all 0.25s ease-in-out;
+  width: 100px;
+  position: absolute;
+  top: 20px;
+  right: 0;
+}
+.dropdown-wrapper .dropdown-container button {
+  display: block;
+}
+.dropdown-wrapper .dropdown-container-hide {
+  transform: scale(1, 0);
+}
+
+.tasks-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.tasks-wrapper .topbar-container {
+  background-color: red;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+@media (min-width: 1000px) {
+  .tasks-wrapper .topbar-container {
+    display: flex;
+  }
+}
+.tasks-wrapper .topbar-container .topbar-interactive {
+  display: flex;
+  align-items: center;
+}
+.tasks-wrapper .topbar-container .topbar-interactive .dropdown-wrapper {
+  position: relative;
+}
+.tasks-wrapper .tasks-container {
+  padding: 1rem;
+  flex-grow: 1;
+}
+@media (min-width: 1000px) {
+  .tasks-wrapper .tasks-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-auto-rows: auto;
+    gap: 2rem;
+  }
+}
+.tasks-wrapper .tasks-container .status-group .status-cards-container {
+  display: grid;
+  gap: 1rem;
+  max-height: none;
+  transition: all 0.25s ease-in-out;
+}
+.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card {
+  background-color: blue;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.tasks-wrapper .tasks-container .status-group .status-cards-container-hide {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+
 .App {
   height: 100vh;
   height: 100dvh;
   transition: all 0.3s ease-in-out;
   background-color: #e5ecfa;
+  /*
+  .right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: $lt-borders;
+  }
+  */
 }
 @media (min-width: 1000px) {
   .App {
@@ -322,10 +454,50 @@
     grid-template-columns: 15% 85%;
   }
 }
-.App .right {
+
+.subtask-checkbox {
+  display: flex;
+  background-color: red;
+  transition: all 0.25s ease-in-out;
+}
+
+.new-column-btn {
+  background: linear-gradient(to bottom, #cfe2f8, #dce9f7, #e5ecfa);
+  cursor: pointer;
+}
+
+.loading-lines-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  background-color: #e5ecfa;
+  height: 200px;
+}
+.loading-lines-container .line {
+  width: 10px;
+  height: 45px;
+  margin: 0 3px;
+  background-color: #635fc7;
+  animation: loadingLines 2s ease-in-out infinite;
+  transform-origin: bottom;
+  border-radius: 10px;
+}
+.loading-lines-container .line:nth-child(2) {
+  animation-delay: 0.2s;
+  background-color: #8a87d5;
+}
+.loading-lines-container .line:nth-child(3) {
+  animation-delay: 0.5s;
+  background-color: #b1afe3;
+}
+
+@keyframes loadingLines {
+  0% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.3);
+  }
 }/*# sourceMappingURL=style.css.map */

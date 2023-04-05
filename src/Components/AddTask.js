@@ -9,6 +9,7 @@ function AddTask() {
     const [status, setStatus] = useState("todo");
     const [subtasks, setSubtasks] = useState([]);
     const [errorLocation, setErrorLocation] = useState("");
+    const [placeholder, setPlaceholder] = useState(["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"]);
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -78,31 +79,35 @@ function AddTask() {
                     <form className='add-form' onSubmit={handleFormSubmit}>
                         <div className='form-group'>
                             <label>Title</label>
-                            <input type='text' onChange={(e) => setTitle(e.target.value)} />
+                            <input type='text' onChange={(e) => setTitle(e.target.value)} placeholder='e.g. Take coffe break'/>
                             <p className={errorLocation === "all" ? "show-error-msg" : errorLocation === "title" ? "show-error-msg" : "hide-error-msg"}>This fiels is required.</p>
                         </div>
                         <div className='form-group'>
                             <label>Description</label>
-                            <textarea onChange={(e) => setDesc(e.target.value)} ></textarea>
+                            <textarea onChange={(e) => setDesc(e.target.value)} placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little."></textarea>
                             <p className={errorLocation === "all" ? "show-error-msg" : errorLocation === "desc" ? "show-error-msg" : "hide-error-msg"}>This fiels is required.</p>
                         </div>
                         <div className='subtasks-container'>
-                            <button type='button' onClick={addSubTaskInput}>+ Add</button>
+                            <label>Subtasks</label>
                             {subtasks ? subtasks.map((el, i) => {
                                 return (
                                     <div key={i}>
-                                        <input type='text' name='subtaskName' onChange={(e) => handleSubtaskInput(e, i)} value={el.subtaskName} />
+                                        <input type='text' name='subtaskName' onChange={(e) => handleSubtaskInput(e, i)} value={el.subtaskName} placeholder={placeholder[i]} />
                                         <button type='button' onClick={() => deleteSubtaskInput(i)}><RiDeleteBack2Line /></button>
                                     </div>
                                 )
                             }) : null}
+                            <button type='button' onClick={addSubTaskInput}>+ Add New Subtask</button>
                         </div>
-                        <select name="status" onChange={(e) => setStatus(e.target.value)}>
-                            <option value="todo" selected>Todo</option>
-                            <option value="doing">Doing</option>
-                            <option value="done">Done</option>
-                        </select>
-                        <button type='submit'>Create</button>
+                        <div className='form-group'>
+                            <label>Status</label>
+                            <select name="status" onChange={(e) => setStatus(e.target.value)}>
+                                <option value="todo" selected>Todo</option>
+                                <option value="doing">Doing</option>
+                                <option value="done">Done</option>
+                            </select>
+                        </div>
+                        <button type='submit'>Create Task</button>
                     </form>
                 </div>
             </animated.div>

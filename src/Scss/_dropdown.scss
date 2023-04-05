@@ -1,0 +1,22 @@
+.dropdown-wrapper {
+
+    .dropdown-container {
+        transform: scale(1, 1);
+        display: grid;
+        background-color: red;
+        transform-origin: top;
+        transition: all 0.25s ease-in-out;
+        width: 100px;
+        position: absolute;
+        top: 20px;
+        right: 0;
+
+        button {
+            display: block;
+        }
+    }
+
+    .dropdown-container-hide {
+        transform: scale(1, 0);
+    }
+}
