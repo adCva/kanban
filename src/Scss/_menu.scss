@@ -1,0 +1,32 @@
+.menu-wrapper {
+    @extend %fixed-parent-el;
+
+    .menu-container {
+        background-color: $lt-main-bg;
+        display: grid;
+        justify-items: start;
+        gap: 1rem;
+        @extend %padding;
+        border-radius: 10px;
+        transition: $transition;
+
+        button {
+            background: transparent;
+        }
+
+        .edit-board-btn {
+            color: green;
+        }
+
+        .delete-board-btn {
+            color: red;
+        }
+    }
+}
+
+
+.menu-wrapper-dark {
+    .menu-container {
+        background-color: $dt-sidebar-bg;
+    }
+}

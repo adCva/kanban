@@ -51,3 +51,58 @@ $dt-gray: #818ea2;
 
 // Others.
 $transition: all 0.25s ease-in-out;
+
+
+
+%fixed-parent-el-mobile {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 1000px) {
+        /*
+        position: initial;
+        background: none;
+        justify-content: flex-start;
+        height: 100%;
+        */
+        all: unset;
+    }
+}
+
+%fixed-parent-el {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 1000px) {
+        /*
+        position: initial;
+        background: none;
+        justify-content: flex-start;
+        height: 100%;
+        */
+        all: unset;
+    }
+}
+
+
+%padding {
+    padding: 1rem 1.5rem;
+
+    @media (min-width: 768px) {
+        padding: 1.2rem 1.5rem;
+    }
+}
