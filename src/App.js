@@ -17,11 +17,6 @@ function App() {
       </div>
       <div className='right'>
         <Tasks />
-        <div className='loading-lines-container'>
-          <div className='line'></div>
-          <div className='line'></div>
-          <div className='line'></div>
-        </div>
       </div>
     </div>
   );
