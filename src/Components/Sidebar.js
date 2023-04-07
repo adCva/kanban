@@ -8,12 +8,18 @@ import { HiEllipsisVertical, HiSun } from "react-icons/hi2";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { TiDelete } from "react-icons/ti";
+// Redux.
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleDarkTheme, hideSidebar, setActiveBoard } from "../Redux/ux";
 
 function Sidebar() {
+    const dispatch = useDispatch();
     const mobilDropdownRef = useRef(null);
     const [isMobileCard, setIsMobileCard] = useState(true);
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [isDropdown, setIsDropdown] = useState(false);
+    const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
+    const isSidebarHidden = useSelector((state) => state.ux.isSidebarHidden);
+    const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
 
 
     const transition = useTransition(isMobileCard, {
@@ -58,7 +64,17 @@ function Sidebar() {
             window.removeEventListener("DOMContentLoaded", displayContentBigScreen);
             window.removeEventListener("resize", displayContentBigScreen);
         }
-    }, [isMobileCard])
+    });
+
+
+
+    const changeBoard = (board) => {
+        dispatch(setActiveBoard(board));
+
+        if (window.innerWidth < 1000) {
+            setIsMobileCard(false);
+        }
+    }
 
 
     return (
@@ -66,8 +82,8 @@ function Sidebar() {
             {/* ===================== Logo & Mobile Buttons ===================== */}
             <div className='logo-wrapper'>
                 <div className='logo-container'>
-                    <div className='logo'></div>
-                    <h3>Platform Launch</h3>
+                    <div className={isSidebarHidden ? "logo logo-hide" : "logo"}></div>
+                    <h3>{currentActiveBoard}</h3>
                     <button onClick={() => setIsMobileCard(!isMobileCard)}>{isMobileCard ? <BiChevronUp /> : <BiChevronDown />}</button>
                 </div>
                 <div className='mobile-btns'>
@@ -90,23 +106,23 @@ function Sidebar() {
                         {/* =========== Boards List =========== */}
                         <div className='active-boards-container'>
                             <cite>All Boards (0)</cite>
-                            <div className='active-boards'>
-                                <button className='board-btn active-board-btn' ><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
-                                <button className='board-btn'><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
-                                <button className='board-btn'><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
+                            <div className={isSidebarHidden ? "active-boards active-boards-hide" : "active-boards"}>
+                                <button className={currentActiveBoard === "Platform Launch" ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard("Platform Launch")}><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
+                                <button className={currentActiveBoard === "Marketing Plan" ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard("Marketing Plan")}><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
+                                <button className={currentActiveBoard === "Roadmap" ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard("Roadmap")}><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
                             </div>
                         </div>
 
                         {/* =========== Theme Btn Container =========== */}
-                        <div className='theme-btn-wrapper'>
+                        <div className={isSidebarHidden ? "theme-btn-wrapper theme-btn-wrapper-hide" : "theme-btn-wrapper"}>
                             <div className='theme-btn-container'>
                                 <dfn><HiSun /></dfn>
-                                <div className='theme-switcher' onClick={() => setIsDarkTheme(!isDarkTheme)}>
+                                <div className='theme-switcher' onClick={() => dispatch(toggleDarkTheme())}>
                                     <button className={isDarkTheme ? "theme-btn theme-btn-right" : "theme-btn"} />
                                 </div>
                                 <dfn><BsMoonStarsFill /></dfn>
                             </div>
-                            <button className='hide-sidebar-btn'><BiHide/> Hide Sidebar</button>
+                            <button className='hide-sidebar-btn' onClick={() => dispatch(hideSidebar())}><BiHide/> Hide Sidebar</button>
                         </div>
 
                     </div>

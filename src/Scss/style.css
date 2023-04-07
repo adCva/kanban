@@ -54,7 +54,7 @@
 }
 
 .sidebar-wrapper {
-  background-color: #f2f6fd;
+  background-color: #ffffff;
   color: #000114;
   transition: all 0.25s ease-in-out;
 }
@@ -82,6 +82,9 @@
     width: 177px;
     height: 30px;
   }
+}
+.sidebar-wrapper .logo-wrapper .logo-container .logo-hide {
+  width: 0;
 }
 .sidebar-wrapper .logo-wrapper .logo-container h3 {
   color: #505b6d;
@@ -266,7 +269,9 @@
   max-height: 300px;
   overflow-y: auto;
   scrollbar-width: none;
+  opacity: 1;
   transition: all 0.25s ease-in-out;
+  transition-delay: 0.2s;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards::-webkit-scrollbar {
   display: none;
@@ -304,11 +309,17 @@
   background-color: #6460c7;
   color: #f2f6fd;
 }
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards-hide {
+  opacity: 0;
+}
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper {
   display: grid;
   justify-items: start;
   gap: 1rem;
   margin-top: 2rem;
+  transition: all 0.25s ease-in-out;
+  transform: scale(1, 1);
+  transform-origin: left;
 }
 @media (min-width: 1000px) {
   .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper {
@@ -376,6 +387,10 @@
   .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper .hide-sidebar-btn {
     display: flex;
   }
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper-hide {
+  opacity: 0;
+  transform: scale(1, 0);
 }
 
 .sidebar-wrapper-dark {
@@ -457,31 +472,144 @@
   background-color: #2b2c36;
 }
 
+.show-sidebar-container {
+  background-color: #635fc7;
+  color: #ffffff;
+  display: none;
+  padding: 0.8rem 1rem 0.8rem 1.3rem;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  transition-delay: 0.25s;
+}
+.show-sidebar-container:hover {
+  background-color: #7572ce;
+}
+@media (min-width: 1000px) {
+  .show-sidebar-container {
+    display: inline-block;
+    position: fixed;
+    bottom: 4.8rem;
+    left: 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  .show-sidebar-container-hide {
+    left: -100px;
+  }
+}
+
+/*
+.tasks-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    // ======================= Top bar container.
+    .topbar-container {
+        background-color: red;
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+
+        @media (min-width: 1000px) {
+            display: flex;
+        }
+
+        h1 {
+
+        }
+
+        .topbar-interactive {
+            display: flex;
+            align-items: center;
+
+
+            .dropdown-wrapper {
+                position: relative;
+            }
+        }
+    }
+
+    // ======================= Tasks container.
+    .tasks-container {
+        padding: 1rem;
+        flex-grow: 1;
+
+        @media (min-width: 1000px) {
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+            grid-auto-rows: auto;
+            gap: 2rem;
+        }
+
+
+        .status-group {
+            .status-cards-container {
+                display: grid;
+                gap: 1rem;
+                max-height: none;
+                transition: $transition;
+
+                .task-card {
+                    background-color: blue;
+                    padding: 1rem;
+                    border-radius: 10px;
+                }
+            }
+
+            .status-cards-container-hide {
+                max-height: 0;
+                overflow: hidden;
+                transition: $transition;
+            }
+        }
+    }
+}
+*/
 .App {
   height: 100vh;
   height: 100dvh;
-  transition: all 0.3s ease-in-out;
-  background-color: #e5ecfa;
-  /*
-  .right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      background-color: $lt-borders;
-  }
-  */
+  transition: all 0.25s ease-in-out;
+  background-color: #f2f6fd;
+}
+
+.App-Dark {
+  background-color: #20212c;
+}
+
+.sidebar-show {
+  transition: all 0.25s ease-in-out;
 }
 @media (min-width: 1000px) {
-  .App {
+  .sidebar-show {
     display: grid;
     grid-template-columns: 25% 75%;
   }
 }
 @media (min-width: 1300px) {
-  .App {
+  .sidebar-show {
     display: grid;
     grid-template-columns: 15% 85%;
+  }
+}
+
+.sidebar-hide {
+  transition: all 0.25s ease-in-out;
+}
+@media (min-width: 1000px) {
+  .sidebar-hide {
+    display: grid;
+    grid-template-columns: 0 100%;
+  }
+}
+@media (min-width: 1300px) {
+  .sidebar-hide {
+    display: grid;
+    grid-template-columns: 0 100%;
   }
 }
 

@@ -1,13 +1,24 @@
 @import "config";
 @import "sidebar";
 @import "menu";
+@import "showSidebar";
+@import "tasks";
 
 
 .App {
     height: 100vh;
     height: 100dvh;
-    transition: all 0.3s ease-in-out;
-    background-color: $lt-borders;
+    transition: $transition;
+    background-color: $lt-main-bg;
+}
+
+.App-Dark {
+    background-color: $dt-main-bg;
+}
+
+
+.sidebar-show {
+    transition: $transition;
 
     @media (min-width: 1000px) {
         display: grid;
@@ -18,18 +29,28 @@
         display: grid;
         grid-template-columns: 15% 85%;
     }
-
-
-    /*
-    .right {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        background-color: $lt-borders;
-    }
-    */
 }
+
+.sidebar-hide {
+    transition: $transition;
+
+    @media (min-width: 1000px) {
+        display: grid;
+        grid-template-columns: 0 100%;
+    }
+
+    @media (min-width: 1300px) {
+        display: grid;
+        grid-template-columns: 0 100%;
+    }
+}
+
+
+
+
+
+
+
 
 
 .subtask-checkbox {

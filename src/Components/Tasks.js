@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
+// Redux.
+import { useSelector, useDispatch } from 'react-redux';
 
 function Tasks() {
     const [tasks, setTasks] = useState({});
     const [showDropdown, setShowDropdown] = useState(false);
     const [accordion, setAccordion] = useState([]);
     const dropdownRef = useRef(null);
+    const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
 
 
     const closeDropdownOutsideClick = (event) => {
@@ -31,7 +34,7 @@ function Tasks() {
         <div className='tasks-wrapper'>
             {/* ============= Top Bar, Only on Desktop ============= */}
             <div className='topbar-container'>
-                <h1>Board Name</h1>
+                <h1>{currentActiveBoard}</h1>
                 <div className='topbar-interactive'>
                     <button>+ Add New Task</button>
                     <div className='dropdown-wrapper' ref={dropdownRef}>

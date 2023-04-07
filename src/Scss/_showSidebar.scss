@@ -8,6 +8,7 @@
     font-size: 1.5rem;
     cursor: pointer;
     transition: $transition;
+    transition-delay: 0.25s;
 
     &:hover {
         background-color: lighten($lt-purple, 5%);
@@ -17,7 +18,14 @@
     @media (min-width: 1000px) {
         display: inline-block;
         position: fixed;
-        bottom: 4.5rem;
+        bottom: 4.8rem;
         left: 0;
+    }
+}
+
+
+.show-sidebar-container-hide {
+    @media (min-width: 1000px) {
+        left: -100px;
     }
 }

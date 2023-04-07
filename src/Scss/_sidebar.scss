@@ -1,6 +1,6 @@
 // ============================================ Light Theme, Default Theme.
 .sidebar-wrapper {
-    background-color: $lt-main-bg;
+    background-color: $lt-sidebar-bg;
     color: $lt-text;
     transition: $transition;
 
@@ -32,6 +32,10 @@
                     width: 177px;
                     height: 30px;
                 }
+            }
+
+            .logo-hide {
+                width: 0;
             }
 
 
@@ -246,7 +250,9 @@
                     &::-webkit-scrollbar {
                         display: none;
                     }
+                    opacity: 1;
                     transition: $transition;
+                    transition-delay: 0.2s;
 
                     @media (min-width: 1000px) {
                         max-height: 100%;
@@ -286,6 +292,11 @@
                         color: $lt-boards-bg;
                     }
                 }
+
+
+                .active-boards-hide {
+                    opacity: 0;
+                }
             }
 
 
@@ -296,6 +307,9 @@
                 gap: 1rem;
                 margin-top: 2rem;
                 @extend %padding;
+                transition: $transition;
+                transform: scale(1, 1);
+                transform-origin: left;
 
                 @media (min-width: 1000px) {
                     margin-bottom: 1.5rem;
@@ -377,6 +391,12 @@
                         display: flex;
                     }
                 }
+            }
+
+
+            .theme-btn-wrapper-hide {
+                opacity: 0;
+                transform: scale(1, 0);
             }
         }
     }
