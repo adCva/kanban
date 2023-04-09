@@ -1,108 +1,107 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useTransition, animated } from '@react-spring/web'
-// React Icons.
-import { BiChevronUp, BiChevronDown, BiHide } from "react-icons/bi";
-import { HiEllipsisVertical, HiSun } from "react-icons/hi2";
-import { IoIosAdd } from "react-icons/io";
-import { BsMoonStarsFill } from "react-icons/bs";
-import { MdOutlineSpaceDashboard } from "react-icons/md";
+import React, { useState, useEffect, useRef } from 'react';
+// Redux.
+import { useSelector, useDispatch } from 'react-redux';
+
+function Tasks() {
+    const [tasks, setTasks] = useState({});
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [accordion, setAccordion] = useState([]);
+    const dropdownRef = useRef(null);
+    const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
 
 
-function Test() {
-  const mobileBoardCardRef = useRef(null);
-  const [isBoardCardOpen, setIsBoardCardOpen] = useState(true);
-  const [darkTheme, setDarkTheme] = useState(false);
-
-  const transition = useTransition(isBoardCardOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });  
+    const closeDropdownOutsideClick = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setShowDropdown(false);
+        }
+    };
 
 
-  const closeBoardModalOutsideClick = (event) => {
-    if (isBoardCardOpen && event.target.className === "sidebar-content-wrapper") {
-      setIsBoardCardOpen(false);
+    const handleAccordion = (el) => {
+        console.log(el)
+        setAccordion([...accordion, el])
     }
-  };
 
-  const displayContentBigScreen = () => {
-    if (window.innerWidth > 1000) {
-      console.log("big");
-      setIsBoardCardOpen(true);
-    } else {
-      setIsBoardCardOpen(false);
-    }
-  };
+    useEffect(() => {
+        document.addEventListener("click", closeDropdownOutsideClick);
 
+        return() => {
+            document.removeEventListener("click", closeDropdownOutsideClick);
+        }
+    });
 
-  const handleTheme = () => {
-    setDarkTheme(!darkTheme);
-  };
-
-
-  useEffect(() => {
-    document.addEventListener("click", closeBoardModalOutsideClick);
-    window.addEventListener("DOMContentLoaded", displayContentBigScreen);
-    window.addEventListener("resize", displayContentBigScreen);
-
-    return () => {
-      document.removeEventListener("click", closeBoardModalOutsideClick);
-      window.removeEventListener("DOMContentLoaded", displayContentBigScreen);
-      window.removeEventListener("resize", displayContentBigScreen);
-    }
-  });
-
-
-  return (
-    <div className='sidebar-wrapper'>
-      {/* ===================== Logo & Mobile Buttons ===================== */}
-      <div className='sidebar-logo-container'>
-        {/* ==== Logo ==== */}
-        <div className='logo-left'>
-          <div className='logo'></div>
-          <button onClick={() => setIsBoardCardOpen(true)}>{isBoardCardOpen ? <BiChevronUp /> : <BiChevronDown />}</button>
-        </div>
-
-        {/* ==== Add Mobile ==== */}
-        <div className='logo-right'>
-          <button className='add'><IoIosAdd /></button>
-          <button className='dots'><HiEllipsisVertical /></button>
-        </div>
-      </div>
-
-      {/* ===================== Sidebar Content Details ===================== */}
-      {transition((style, isBoardCardOpen) => isBoardCardOpen ? (
-        <animated.div className="sidebar-content-wrapper" style={style}>
-          <div className='sidebar-content-container' ref={mobileBoardCardRef}>
-
-            <div className='active-boards-container'>
-              <cite>All Boards (0)</cite>
-              <div className='existing-boards'>
-                <button className='active-board' draggable><span><MdOutlineSpaceDashboard /></span> Platform Launch</button>
-                <button draggable><span><MdOutlineSpaceDashboard /></span> Marketing Plan</button>
-                <button draggable><span><MdOutlineSpaceDashboard /></span> Roadmap</button>
-              </div>
-              <button className='create-board'><span><MdOutlineSpaceDashboard /></span> + Create New Board</button>
-            </div>
-
-            <div className='theme-btn-wrapper'>
-              <div className='theme-btn-container'>
-                <dfn><HiSun /></dfn>
-                <div className='theme-switcher' onClick={handleTheme}>
-                  <button className={darkTheme ? "theme-btn theme-btn-right" : "theme-btn"} />
+    return (
+        <div className='tasks-wrapper'>
+            {/* ============= Top Bar, Only on Desktop ============= */}
+            <div className='topbar-container'>
+                <h1>{currentActiveBoard}</h1>
+                <div className='topbar-interactive'>
+                    <button>+ Add New Task</button>
+                    <div className='dropdown-wrapper' ref={dropdownRef}>
+                        <button type='button' onClick={() => setShowDropdown(!showDropdown)}>Click Me</button>
+                        <div className={showDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
+                            <button type='button'>Edit</button>
+                            <button type='button'>Delete</button>
+                        </div>
+                    </div>
                 </div>
-                <dfn><BsMoonStarsFill /></dfn>
-              </div>
-              <button className='hide-sidebar-btn'><BiHide/> Hide Sidebar</button>
             </div>
 
-          </div>
-        </animated.div>
-      ) : null)}
-
-    </div>
-  )
+            {tasks ? (
+                <div className='tasks-container'>
+                    <div className='status-group'>
+                        <h1 onClick={() => handleAccordion(1)}><span></span> Todo</h1>
+                        <div className={accordion.includes(1) ? "status-cards-container" : "status-cards-container-hide"} >
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='status-group'>
+                        <h1><span></span> Doing</h1>
+                        <div className={accordion.includes(2) ? "status-cards-container" : "status-cards-container-hide"}>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='status-group'>
+                        <h1><span></span> Done</h1>
+                        <div className={accordion.includes(3) ? "status-cards-container" : "status-cards-container-hide"}>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button className='new-column-btn'>+ New Column</button>
+                </div>
+            ) : (
+                <div className='tasks-container-empty'>
+                    <h1>You don't have any boards!</h1>
+                    <button>+ Create New Board</button>
+                </div>
+            )}
+        </div>
+    )
 }
 
-export default Test;
+export default Tasks;

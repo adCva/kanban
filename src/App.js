@@ -4,6 +4,7 @@ import Sidebar from './Components/Sidebar';
 import './Reset.css';
 import "./Scss/style.css";
 import { useSelector } from 'react-redux';
+import Navbar from './Components/Navbar';
 
 function App() {
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);

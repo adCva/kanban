@@ -1,82 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
 // Redux.
 import { useSelector, useDispatch } from 'react-redux';
+// React Icons.
+import { BiEdit } from "react-icons/bi";
+import { HiEllipsisVertical } from "react-icons/hi2";
+import { TiDelete } from "react-icons/ti";
 
 function Tasks() {
-    const [tasks, setTasks] = useState({});
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [accordion, setAccordion] = useState([]);
-    const dropdownRef = useRef(null);
+    const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
     const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
+    const [tasks, setTasks] = useState({});
+    const [isDropdownActive, setIsDropdownActive] = useState(false);
+    const dropdownRef = useRef();
 
 
-    const closeDropdownOutsideClick = (event) => {
+    const closeTasksDropdownOutsideClick = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-            setShowDropdown(false);
+            setIsDropdownActive(false);
         }
     };
 
 
-    const handleAccordion = (el) => {
-        console.log(el)
-        setAccordion([...accordion, el])
-    }
-
     useEffect(() => {
-        document.addEventListener("click", closeDropdownOutsideClick);
+        document.addEventListener("click", closeTasksDropdownOutsideClick);
 
-        return() => {
-            document.removeEventListener("click", closeDropdownOutsideClick);
+        return () => {
+            document.removeEventListener("click", closeTasksDropdownOutsideClick);
         }
     });
 
+
     return (
-        <div className='tasks-wrapper'>
-            {/* ============= Top Bar, Only on Desktop ============= */}
+        <div className={isDarkTheme ? "tasks-wrapper tasks-wrapper-dark" : "tasks-wrapper"}>
+            {/* ===================== Top Bar, Only on Desktop ===================== */}
             <div className='topbar-container'>
-                <h1>{currentActiveBoard}</h1>
-                <div className='topbar-interactive'>
-                    <button>+ Add New Task</button>
+                <h3>{currentActiveBoard}</h3>
+                <div className='topbar-btns'>
+                    <button className='add-btn'>+ Add New Task</button>
                     <div className='dropdown-wrapper' ref={dropdownRef}>
-                        <button type='button' onClick={() => setShowDropdown(!showDropdown)}>Click Me</button>
-                        <div className={showDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
-                            <button type='button'>Edit</button>
-                            <button type='button'>Delete</button>
+                        <button className='mobile-menu' onClick={() => setIsDropdownActive(!isDropdownActive)}><HiEllipsisVertical /></button>
+                        <div className={isDropdownActive ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
+                            <button className='edit-board-btn'><BiEdit /> Edit Board</button>
+                            <button className='delete-board-btn'><TiDelete /> Delete Board</button>
                         </div>
                     </div>
                 </div>
             </div>
 
+            {/* ============= Content Container ============= */}
             {tasks ? (
                 <div className='tasks-container'>
                     <div className='status-group'>
-                        <h1 onClick={() => handleAccordion(1)}><span></span> Todo</h1>
-                        <div className={accordion.includes(1) ? "status-cards-container" : "status-cards-container-hide"} >
-                            <div className='task-card'>
-                                <h2>Card title</h2>
-                                <p>0 out of # subtasks</p>
-                            </div>
-                            <div className='task-card'>
-                                <h2>Card title</h2>
-                                <p>0 out of # subtasks</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='status-group'>
-                        <h1><span></span> Doing</h1>
-                        <div className={accordion.includes(2) ? "status-cards-container" : "status-cards-container-hide"}>
-                            <div className='task-card'>
-                                <h2>Card title</h2>
-                                <p>0 out of # subtasks</p>
-                            </div>
-                            <div className='task-card'>
-                                <h2>Card title</h2>
-                                <p>0 out of # subtasks</p>
-                            </div>
-                            <div className='task-card'>
-                                <h2>Card title</h2>
-                                <p>0 out of # subtasks</p>
-                            </div>
+                        <h1><span></span> To Do (n)</h1>
+                        <div className='status-cards-container'>
                             <div className='task-card'>
                                 <h2>Card title</h2>
                                 <p>0 out of # subtasks</p>
@@ -84,8 +60,17 @@ function Tasks() {
                         </div>
                     </div>
                     <div className='status-group'>
-                        <h1><span></span> Done</h1>
-                        <div className={accordion.includes(3) ? "status-cards-container" : "status-cards-container-hide"}>
+                        <h1><span></span> Doing (n)</h1>
+                        <div className='status-cards-container'>
+                            <div className='task-card'>
+                                <h2>Card title</h2>
+                                <p>0 out of # subtasks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='status-group'>
+                        <h1><span></span> Done (n)</h1>
+                        <div className='status-cards-container'>
                             <div className='task-card'>
                                 <h2>Card title</h2>
                                 <p>0 out of # subtasks</p>
@@ -96,8 +81,7 @@ function Tasks() {
                 </div>
             ) : (
                 <div className='tasks-container-empty'>
-                    <h1>You don't have any boards!</h1>
-                    <button>+ Create New Board</button>
+                    none
                 </div>
             )}
         </div>
