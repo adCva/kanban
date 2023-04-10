@@ -14,11 +14,49 @@
             display: flex;
         }
 
-        h3 {
-            color: darken($lt-text-light, 20%);
-            font-size: 1.2rem;
-            font-weight: $font-bold;
-            transition: $transition;
+
+        .topbar-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; 
+
+
+            .topbar-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: initial;
+                transition: $transition;
+                transform: scale(1, 1);
+
+                .line {
+                    width: 6px;
+                    height: 25px;
+                    margin: 0 2px;
+                    background-color: #635fc7;
+                    border-radius: 3px;
+            
+                    &:nth-child(2) {
+                        background-color: #8a87d5;
+                    }
+            
+                    &:nth-child(3) {
+                        background-color: #b1afe3;
+                    }
+                }
+            }
+
+            .topbar-logo-hide {
+                position: absolute;
+                transform: scale(0, 0);
+            }
+
+            h3 {
+                color: darken($lt-text-light, 20%);
+                font-size: 1.2rem;
+                font-weight: $font-bold;
+                transition: $transition;
+            }
         }
 
 
@@ -31,8 +69,8 @@
 
 
             .add-btn {
-                background: #cdcfef;
-                color: $lt-secondary-bg;
+                background: $dt-purple;
+                color: $lt-main-bg;
                 font-size: 0.9rem;
                 font-weight: $font-bold;
                 display: inline-flex;
@@ -42,7 +80,7 @@
                 transition: $transition;
 
                 &:hover {
-                    background: darken(#cdcfef, 10%);
+                    background: lighten($dt-purple, 10%);
                 }
             }
 
@@ -106,7 +144,7 @@
 
     // ========= Tasks container.
     .tasks-container {
-        height: calc(100vh - 4.3rem);
+        min-height: calc(100vh - 4.3rem);
         @extend %padding;
 
         @media (min-width: 1000px) {
@@ -125,26 +163,49 @@
             }
             
             h1 {
+                color: $lt-text;
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
                 margin-bottom: 1.5rem;
+                transition: $transition;
+
                 span {
                     display: inline-block;
-                    background-color: green;
                     width: 12px;
                     height: 12px;
+                    margin-left: 0.5rem;
                     border-radius: 50px;
+                }
+
+                .todo-span {
+                    background-color: #49c4e5;
+                }
+
+                .doing-span {
+                    background-color: #67e2ae;
+                }
+
+                .done-span {
+                    background-color: #8471f2;
                 }
             }
 
             .status-cards-container {
                 .task-card {
-                    background-color: red;
-                    padding: 1rem;
+                    background-color: $lt-sidebar-bg;
+                    color: darken($lt-text-light, 20%);
+                    max-width: 400px;
+                    @extend %padding;
                     border-radius: 10px;
+                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                     cursor: pointer;
                     transition: $transition;
 
                     h2 {
-                        font-size: 1.1rem;
+                        font-size: 1.05rem;
+                        font-weight: $font-bold;
+                        margin-bottom: 1rem;
                     }
 
                     p {
@@ -154,8 +215,15 @@
             }
         }
 
-        .new-column-btn {
-            
+        .add-column-btn {
+            background-color: darken($lt-main-bg, 0.5%);
+            color: darken($lt-text-light, 20%);
+            font-size: 1.05rem;
+            font-weight: $font-bold;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            transition: $transition;
         }
 
         .new-column-btn-full-width {
@@ -181,21 +249,15 @@
         background-color: $dt-sidebar-bg;
         color: $dt-text;
 
-        h3 {
-            color: $dt-text
+        .topbar-info {
+            h3 {
+                color: $dt-text
+            }
         }
 
 
         // ====== Topbar Buttons.
         .topbar-btns {
-            .add-btn {
-                background: $dt-purple;
-                color: $lt-main-bg;
-
-                &:hover {
-                    background: lighten($dt-purple, 10%);
-                }
-            }
             .dropdown-wrapper {
                 .dropdown-container {
                     background-color: $lt-main-bg;
@@ -210,49 +272,28 @@
             }
         }
     }
-}
 
 
-/*
-.tasks-wrapper {
-
-    // ======================= Top bar container.
-    .topbar-container {
-
-        .topbar-interactive {
-            display: flex;
-            align-items: center;
-
-
-            .dropdown-wrapper {
-                position: relative;
-            }
-        }
-    }
-
-    // ======================= Tasks container.
+    // ========= Tasks container.
     .tasks-container {
-
         .status-group {
-            .status-cards-container {
-                display: grid;
-                gap: 1rem;
-                max-height: none;
-                transition: $transition;
+            h1 {
+                color: $dt-text;
+            }
 
+            .status-cards-container {
                 .task-card {
-                    background-color: blue;
-                    padding: 1rem;
-                    border-radius: 10px;
+                    background-color: $dt-sidebar-bg;
+                    color: $dt-text;
+                    box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
                 }
             }
+        }
 
-            .status-cards-container-hide {
-                max-height: 0;
-                overflow: hidden;
-                transition: $transition;
-            }
+        .add-column-btn {
+            background-color: lighten($dt-sidebar-bg, 0.5%);
+            color: $dt-text;
+            box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
         }
     }
 }
-*/

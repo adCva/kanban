@@ -9,6 +9,7 @@ import { TiDelete } from "react-icons/ti";
 function Tasks() {
     const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
     const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
+    const isSidebar = useSelector((state) => state.ux.isSidebarHidden);
     const [tasks, setTasks] = useState({});
     const [isDropdownActive, setIsDropdownActive] = useState(false);
     const dropdownRef = useRef();
@@ -34,7 +35,14 @@ function Tasks() {
         <div className={isDarkTheme ? "tasks-wrapper tasks-wrapper-dark" : "tasks-wrapper"}>
             {/* ===================== Top Bar, Only on Desktop ===================== */}
             <div className='topbar-container'>
-                <h3>{currentActiveBoard}</h3>
+                <div className='topbar-info'>
+                    <div className={isSidebar ? "topbar-logo" : "topbar-logo topbar-logo-hide"}>
+                        <div className='line'></div>
+                        <div className='line'></div>
+                        <div className='line'></div>
+                    </div>
+                    <h3>{currentActiveBoard}</h3>
+                </div>
                 <div className='topbar-btns'>
                     <button className='add-btn'>+ Add New Task</button>
                     <div className='dropdown-wrapper' ref={dropdownRef}>
@@ -51,7 +59,7 @@ function Tasks() {
             {tasks ? (
                 <div className='tasks-container'>
                     <div className='status-group'>
-                        <h1><span></span> To Do (n)</h1>
+                        <h1><span className='todo-span'></span> To Do (n)</h1>
                         <div className='status-cards-container'>
                             <div className='task-card'>
                                 <h2>Card title</h2>
@@ -60,7 +68,7 @@ function Tasks() {
                         </div>
                     </div>
                     <div className='status-group'>
-                        <h1><span></span> Doing (n)</h1>
+                        <h1><span className='doing-span'></span> Doing (n)</h1>
                         <div className='status-cards-container'>
                             <div className='task-card'>
                                 <h2>Card title</h2>
@@ -69,7 +77,7 @@ function Tasks() {
                         </div>
                     </div>
                     <div className='status-group'>
-                        <h1><span></span> Done (n)</h1>
+                        <h1><span className='done-span'></span> Done (n)</h1>
                         <div className='status-cards-container'>
                             <div className='task-card'>
                                 <h2>Card title</h2>
@@ -77,7 +85,7 @@ function Tasks() {
                             </div>
                         </div>
                     </div>
-                    <button className='new-column-btn'>+ New Column</button>
+                    <button className='add-column-btn'>+ New Column</button>
                 </div>
             ) : (
                 <div className='tasks-container-empty'>
