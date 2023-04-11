@@ -1,6 +1,7 @@
 import Tasks from './Components/Tasks';
 import ShowSidebar from './Components/ShowSidebar';
 import Sidebar from './Components/Sidebar';
+import AddTask from './Components/AddTask';
 import './Reset.css';
 import "./Scss/style.css";
 import { useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ function App() {
         </div>
         <div className='right'>
           <Tasks />
+          <AddTask />
           <ShowSidebar />
         </div>
       </div>

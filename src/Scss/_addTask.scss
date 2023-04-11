@@ -1,4 +1,11 @@
 .add-task-wrapper {
+    @extend %fixed-parent-el;
+}
+
+
+
+/*
+.add-task-wrapper {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -42,3 +49,4 @@
         }
     }
 }
+*/

@@ -21,7 +21,7 @@
   }
 }
 
-.menu-wrapper {
+.add-task-wrapper, .menu-wrapper {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
@@ -33,7 +33,7 @@
   align-items: center;
 }
 @media (min-width: 1000px) {
-  .menu-wrapper {
+  .add-task-wrapper, .menu-wrapper {
     /*
     position: initial;
     background: none;
@@ -725,6 +725,52 @@
   box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
 }
 
+/*
+.add-task-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .add-task-container {
+        background-color: $lt-sidebar-bg;
+        min-width: 300px;
+        min-height: 400px;
+        padding: 1rem;
+        border-radius: 10px;
+
+
+        h1 {
+
+        }
+
+        .add-form {
+            display: grid;
+
+            .form-group {
+                display: grid;
+
+
+                .show-error-msg {
+                    color: red;
+                    transition: $transition;
+                    transform: scale(1);
+                    transform-origin: left;
+                }
+
+                .hide-error-msg {
+                    transform: scale(0);
+                }
+            }
+        }
+    }
+}
+*/
 .App {
   height: 100vh;
   height: 100dvh;
