@@ -16,7 +16,30 @@ function AddTask() {
     return (
         transition((style, showAddTaskModal) => showAddTaskModal ? (
             <animated.div style={style} className='add-task-wrapper'>
-                Test
+                <div className='add-task-container'>
+                    <h1>Add Task</h1>
+                    <form className='add-form'>
+
+                        <div className='form-group'>
+                            <label>Title</label>
+                            <input type='text' placeholder='e.g. Take coffe break'/>
+                        </div>
+
+                        <div className='form-group'>
+
+                        </div>
+
+                        <div className='subtasks-container'>
+
+                        </div>
+
+                        <div className='form-group'>
+
+                        </div>
+
+                        <button type='submit'>Create Task</button>
+                    </form>
+                </div>
             </animated.div>
         ) : null)
     )

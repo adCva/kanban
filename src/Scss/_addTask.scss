@@ -1,5 +1,20 @@
 .add-task-wrapper {
     @extend %fixed-parent-el;
+
+    .add-task-container {
+
+
+        h1 {}
+
+
+        .add-form {
+
+
+            .form-group {}
+
+            .subtasks-container {}
+        }
+    }
 }
 
 
