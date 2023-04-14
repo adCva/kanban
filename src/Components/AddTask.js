@@ -5,7 +5,10 @@ import { RiDeleteBack2Line } from "react-icons/ri";
 
 function AddTask() {
     const [showAddTaskModal, setShowAddTaskModal] = useState(true);
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
     const [subtasks, setSubtasks] = useState([]);
+    const [status, setStatus] = useState("todo");
 
     const transition = useTransition(showAddTaskModal, {
         from: { opacity: 0 },
@@ -23,13 +26,13 @@ function AddTask() {
 
                         <div className='form-group'>
                             <label>Title</label>
-                            <input type='text' placeholder='e.g. Take coffe break'/>
+                            <input type='text' placeholder='e.g. Take coffe break' onChange={(e) => setTitle(e.target.value)} />
                             <p>This fiels is required.</p>
                         </div>
 
                         <div className='form-group'>
                             <label>Description</label>
-                            <textarea placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little."></textarea>
+                            <textarea placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little." onChange={(e) => setDesc(e.target.value)} ></textarea>
                             <p>This fiels is required.</p>
                         </div>
 
@@ -39,7 +42,7 @@ function AddTask() {
                                 return (
                                     <div key={i}>
                                         <input type='text' name='subtaskName' value={el.subtaskName} placeholder={placeholder[i]} />
-                                        <button type='button'><RiDeleteBack2Line /></button>
+                                        <button type='button' onClick={() => deleteSubtaskInput(i)} ><RiDeleteBack2Line /></button>
                                     </div>
                                 )
                             }) : null}
@@ -48,7 +51,7 @@ function AddTask() {
 
                         <div className='form-group'>
                             <label>Status</label>
-                            <select name="status">
+                            <select name="status" onChange={(e) => setStatus(e.target.value)} >
                                 <option value="todo" selected>Todo</option>
                                 <option value="doing">Doing</option>
                                 <option value="done">Done</option>
