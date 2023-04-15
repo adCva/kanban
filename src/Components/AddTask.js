@@ -4,17 +4,72 @@ import { RiDeleteBack2Line } from "react-icons/ri";
 
 
 function AddTask() {
-    const [showAddTaskModal, setShowAddTaskModal] = useState(true);
+    const [showModal, setShowModal] = useState(true);
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
-    const [subtasks, setSubtasks] = useState([]);
     const [status, setStatus] = useState("todo");
+    const [subtasks, setSubtasks] = useState([]);
+    const [errorLocation, setErrorLocation] = useState("");
+    const [placeholder, setPlaceholder] = useState(["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"]);
 
-    const transition = useTransition(showAddTaskModal, {
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+
+        if (title === "" && desc === "") {
+            setErrorLocation("all");
+        } else if (title === "") {
+            setErrorLocation("title");
+        } else if (desc === "") {
+            setErrorLocation("desc");
+        } else {
+            const formData = {
+                title: title,
+                description: desc,
+                status: status,
+                subtasks: subtasks
+            };
+
+            console.log(formData);
+        }
+    };
+
+    const addSubTaskInput = () => {
+        if (subtasks.length < 3) setSubtasks([...subtasks, {subtaskName: "", isComplete: false}])
+    };
+
+    const deleteSubtaskInput = (i) => {
+       let tempArray = [...subtasks];
+        tempArray.splice(i, 1);
+        setSubtasks([...tempArray]);
+    };
+
+    const handleSubtaskInput = (e, i) => {
+        let tempArray = [...subtasks];
+        let el = tempArray[i];
+        el.subtaskName = e.target.value;
+        tempArray.splice(i, 1, el);
+        setSubtasks([...tempArray]);
+    };
+
+    const closeModalOutsideClick = (event) => {
+        if (showModal && event.target.className === "add-task-wrapper") {
+            setShowModal(false);
+          }
+    };
+
+    const transition = useTransition(showModal, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },
     });  
+
+    useEffect(() => {
+        document.addEventListener("click", closeModalOutsideClick);
+
+        return() => {
+            document.removeEventListener("click", closeModalOutsideClick);
+        }
+    });
 
 
     return (
