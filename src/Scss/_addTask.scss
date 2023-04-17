@@ -2,7 +2,59 @@
     @extend %fixed-parent-el;
 
     .add-task-container {
+        background-color: $lt-sidebar-bg;
+        color: darken($lt-text-light, 20%);
+        max-width: 400px;
+        @extend %padding;
+        border-radius: 10px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        cursor: pointer;
+        transition: $transition;
 
+        h1 {
+            font-size: 1.05rem;
+            font-weight: $font-bold;
+            margin-bottom: 1rem;
+        }
+
+
+        .add-form {
+            display: grid;
+            gap: 1rem;
+
+            .form-group {
+                display: grid;
+                gap: 1rem;
+
+                label {}
+
+                input {}
+
+                textarea {}
+
+                p {}
+
+                select {}
+            }
+
+            .subtasks-container {
+
+                input {}
+
+                button {}
+            }
+        }
+    }
+}
+
+
+
+// ============================================ Dark Theme.
+.add-task-wrapper-dark {
+    .add-task-container {
+        background-color: $dt-sidebar-bg;
+        color: $dt-text;
+        box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
 
         h1 {}
 
@@ -32,52 +84,3 @@
         }
     }
 }
-
-
-
-/*
-.add-task-wrapper {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-
-    .add-task-container {
-        background-color: $lt-sidebar-bg;
-        min-width: 300px;
-        min-height: 400px;
-        padding: 1rem;
-        border-radius: 10px;
-
-
-        h1 {
-
-        }
-
-        .add-form {
-            display: grid;
-
-            .form-group {
-                display: grid;
-
-
-                .show-error-msg {
-                    color: red;
-                    transition: $transition;
-                    transform: scale(1);
-                    transform-origin: left;
-                }
-
-                .hide-error-msg {
-                    transform: scale(0);
-                }
-            }
-        }
-    }
-}
-*/
