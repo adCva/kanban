@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 import { RiDeleteBack2Line } from "react-icons/ri";
+// Redux.
+import { useSelector } from 'react-redux';
 
 
 function AddTask() {
+    const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
     const [showModal, setShowModal] = useState(true);
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
@@ -74,7 +77,7 @@ function AddTask() {
 
     return (
         transition((style, showAddTaskModal) => showAddTaskModal ? (
-            <animated.div style={style} className='add-task-wrapper'>
+            <animated.div style={style} className={isDarkTheme ? "add-task-wrapper add-task-wrapper-dark" : "add-task-wrapper"}>
                 <div className='add-task-container'>
                     <h1>Add Task</h1>
                     <form className='add-form'>

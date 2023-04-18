@@ -28,20 +28,35 @@
 
                 label {}
 
-                input {}
+                input {
+                    background-color: #e7e7e7;
+                }
 
-                textarea {}
+                textarea {
+                    background-color: #e7e7e7;
+                }
 
-                p {}
+                p {
+                    color: red;
+                }
 
                 select {}
             }
 
             .subtasks-container {
+                display: grid;
+                gap: 1rem;
 
                 input {}
 
                 button {}
+            }
+
+            button {
+                background-color: $lt-menu-hover;
+                color: $lt-main-bg;
+                padding: 0.7rem 0;
+                border-radius: 10px;
             }
         }
     }

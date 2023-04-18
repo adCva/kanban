@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const ux = createSlice({
     name: "User Experience",
     initialState: {
-        isDarkTheme: false,
+        isDarkTheme: true,
         isSidebarHidden: false,
         activeBoard: "Platform Launch"
     },
