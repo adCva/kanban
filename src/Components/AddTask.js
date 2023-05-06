@@ -15,6 +15,7 @@ function AddTask() {
     const [errorLocation, setErrorLocation] = useState("");
     const [placeholder, setPlaceholder] = useState(["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"]);
 
+    
     const handleFormSubmit = (event) => {
         event.preventDefault();
 

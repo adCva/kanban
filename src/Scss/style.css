@@ -728,11 +728,25 @@
 .add-task-wrapper .add-task-container {
   background-color: #ffffff;
   color: #505b6d;
-  max-width: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 400px;
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
+}
+@media (min-width: 411px) {
+  .add-task-wrapper .add-task-container {
+    min-width: 350px;
+    max-width: none;
+    min-height: 450px;
+  }
+}
+@media (min-width: 768px) {
+  .add-task-wrapper .add-task-container {
+    min-height: 500px;
+  }
 }
 .add-task-wrapper .add-task-container h1 {
   font-size: 1.05rem;
