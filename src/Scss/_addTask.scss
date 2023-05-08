@@ -1,17 +1,19 @@
+// ============================================ Light Theme.
 .add-task-wrapper {
     @extend %fixed-parent-el;
 
     .add-task-container {
         background-color: $lt-sidebar-bg;
         color: darken($lt-text-light, 20%);
+        @extend %padding;
         min-width: 300px;
         max-width: 300px;
         min-height: 400px;
-        @extend %padding;
         border-radius: 10px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         cursor: pointer;
         transition: $transition;
+
 
         @media (min-width: 411px) {
             min-width: 350px;
@@ -19,15 +21,41 @@
             min-height: 450px;
         }
 
+
         @media (min-width: 768px) {
             min-height: 500px;
         }
 
+
+        // ============= H1.
         h1 {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: $font-bold;
             margin-bottom: 1rem;
         }
+
+
+        // ============= Form.
+        .add-form {
+
+        }
+    }
+}
+
+
+// ============================================ Dark Theme.
+.add-task-wrapper-dark {
+    .add-task-container {
+        background-color: $dt-sidebar-bg;
+        color: $dt-text;
+    }
+}
+
+
+/*
+.add-task-wrapper {
+
+    .add-task-container {
 
 
         .add-form {
@@ -79,8 +107,8 @@
 // ============================================ Dark Theme.
 .add-task-wrapper-dark {
     .add-task-container {
-        background-color: $dt-sidebar-bg;
-        color: $dt-text;
+        
+        
         box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
 
         h1 {}
@@ -111,3 +139,5 @@
         }
     }
 }
+
+*/
