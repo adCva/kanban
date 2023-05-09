@@ -29,7 +29,7 @@
 
         // ============= H1.
         h1 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: $font-bold;
             margin-bottom: 1rem;
         }
@@ -37,60 +37,95 @@
 
         // ============= Form.
         .add-form {
-
-        }
-    }
-}
-
-
-// ============================================ Dark Theme.
-.add-task-wrapper-dark {
-    .add-task-container {
-        background-color: $dt-sidebar-bg;
-        color: $dt-text;
-    }
-}
-
-
-/*
-.add-task-wrapper {
-
-    .add-task-container {
-
-
-        .add-form {
             display: grid;
             gap: 1rem;
+            
 
+            // ============= Form Group.
             .form-group {
                 display: grid;
-                gap: 1rem;
+                // gap: 1rem;
 
-                label {}
+
+                label {
+                    margin-bottom: 0.4rem;
+                    letter-spacing: -0.3px;
+                } 
+
 
                 input {
                     background-color: #e7e7e7;
+                    padding: 0.3rem 0.4rem;
+                    border-radius: 5px;
                 }
+
 
                 textarea {
                     background-color: #e7e7e7;
+                    padding: 0.3rem 0.4rem;
+                    border-top-right-radius: 5px;
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
                 }
+
 
                 p {
                     color: red;
+                    font-size: 0.85rem;
+                    letter-spacing: -0.3px;
+                    margin-top: 0.3rem;
                 }
 
-                select {}
+
+                select {
+                    background-color: #e7e7e7;
+                    padding: 0.3rem 0.4rem;
+                    border-radius: 5px;
+                }
             }
 
+
+            // ============= Subtasks Container.
             .subtasks-container {
                 display: grid;
-                gap: 1rem;
+                gap: 0.5rem;
 
-                input {}
 
-                button {}
+                .subtask-interactive {
+                    display: flex;
+                    width: 100%;
+
+
+                    input {
+                        background-color: #e7e7e7;
+                        padding: 0.2rem 0.4rem;
+                        border-top-left-radius: 5px;
+                        border-bottom-left-radius: 5px;
+                        width: 93%;
+                        margin-right: 0.7rem;
+                    }
+
+
+                    button {
+                        background-color: transparent;
+                        color: #e7e7e7;
+                        font-size: 1.2rem;
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+
+
+                .add-subtask-btn {
+                    background-color: $lt-menu-hover;
+                    color: $lt-main-bg;
+                    padding: 0.7rem 0;
+                    border-radius: 10px;
+                }
             }
+
+
 
             button {
                 background-color: $lt-menu-hover;
@@ -103,41 +138,10 @@
 }
 
 
-
 // ============================================ Dark Theme.
 .add-task-wrapper-dark {
     .add-task-container {
-        
-        
-        box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
-
-        h1 {}
-
-
-        .add-form {
-
-
-            .form-group {
-
-                label {}
-
-                input {}
-
-                textarea {}
-
-                p {}
-
-                select {}
-            }
-
-            .subtasks-container {
-
-                input {}
-
-                button {}
-            }
-        }
+        background-color: $dt-sidebar-bg;
+        color: $dt-text;
     }
 }
-
-*/

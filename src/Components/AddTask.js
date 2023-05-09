@@ -99,13 +99,13 @@ function AddTask() {
                             <label>Subtasks</label>
                             {subtasks ? subtasks.map((el, i) => {
                                 return (
-                                    <div key={i}>
+                                    <div key={i} className='subtask-interactive'>
                                         <input type='text' name='subtaskName' value={el.subtaskName} placeholder={placeholder[i]} />
                                         <button type='button' onClick={() => deleteSubtaskInput(i)} ><RiDeleteBack2Line /></button>
                                     </div>
                                 )
                             }) : null}
-                            <button type='button' onClick={addSubTaskInput}>+ Add New Subtask</button>
+                            <button type='button' onClick={addSubTaskInput} className='add-subtask-btn'>+ Add New Subtask</button>
                         </div>
 
                         <div className='form-group'>
