@@ -805,7 +805,7 @@
 }
 .add-task-wrapper .add-task-container .add-form .subtasks-container .subtask-interactive button {
   background-color: transparent;
-  color: #e7e7e7;
+  color: #818ea2;
   font-size: 1.2rem;
   display: flex;
   align-items: center;
@@ -826,6 +826,12 @@
 .add-task-wrapper-dark .add-task-container {
   background-color: #2b2c36;
   color: #ffffff;
+}
+.add-task-wrapper-dark .add-task-container .subtasks-container .subtask-interactive input {
+  background-color: #e7e7e7;
+}
+.add-task-wrapper-dark .add-task-container .subtasks-container .subtask-interactive button {
+  color: #e7e7e7;
 }
 
 .App {

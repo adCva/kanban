@@ -108,7 +108,7 @@
 
                     button {
                         background-color: transparent;
-                        color: #e7e7e7;
+                        color: $dt-gray;
                         font-size: 1.2rem;
                         display: flex;
                         align-items: center;
@@ -143,5 +143,18 @@
     .add-task-container {
         background-color: $dt-sidebar-bg;
         color: $dt-text;
+
+        // ============= Subtasks Container.
+        .subtasks-container {
+            .subtask-interactive {
+                input {
+                    background-color: #e7e7e7;
+                }
+
+                button {
+                    color: #e7e7e7;
+                }
+            }
+        }
     }
 }
