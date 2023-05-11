@@ -5,7 +5,8 @@ export const ux = createSlice({
     initialState: {
         isDarkTheme: true,
         isSidebarHidden: false,
-        activeBoard: "Platform Launch"
+        activeBoard: "Platform Launch",
+        isAddTask: false
     },
 
     reducers: {
@@ -22,11 +23,15 @@ export const ux = createSlice({
         },
         setActiveBoard: (state, action) => {
             state.activeBoard = action.payload;
+        },
+        toggleAddTask: (state) => {
+            console.log(state.isAddTask);
+            state.isAddTask = true
         }
     }
 });
 
 
-export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard} = ux.actions;
+export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, toggleAddTask } = ux.actions;
 
 export default ux.reducer;

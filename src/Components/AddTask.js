@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 import { RiDeleteBack2Line } from "react-icons/ri";
 // Redux.
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleAddTask } from "../Redux/ux";
 
 
 function AddTask() {
+    const dispatch = useDispatch();
     const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
-    const [showModal, setShowModal] = useState(true);
+    const isAddTaskModal = useSelector((state) => state.ux.isAddTask);
+    // const [showModal, setShowModal] = useState(true);
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [status, setStatus] = useState("todo");
@@ -41,11 +44,13 @@ function AddTask() {
         if (subtasks.length < 3) setSubtasks([...subtasks, {subtaskName: "", isComplete: false}])
     };
 
+
     const deleteSubtaskInput = (i) => {
        let tempArray = [...subtasks];
         tempArray.splice(i, 1);
         setSubtasks([...tempArray]);
     };
+
 
     const handleSubtaskInput = (e, i) => {
         let tempArray = [...subtasks];
@@ -55,17 +60,23 @@ function AddTask() {
         setSubtasks([...tempArray]);
     };
 
+
     const closeModalOutsideClick = (event) => {
-        if (showModal && event.target.className === "add-task-wrapper") {
-            setShowModal(false);
-          }
+        //console.log(event.target.className);
+        if (isAddTaskModal && event.target.className === "add-task-wrapper" || event.target.className === "add-task-wrapper add-task-wrapper-dark") {
+            // setShowModal(false);
+            dispatch(toggleAddTask());
+            //console.log("outside click");
+        }
     };
 
-    const transition = useTransition(showModal, {
+
+    const transition = useTransition(isAddTaskModal, {
         from: { opacity: 0 },
         enter: { opacity: 1 },
         leave: { opacity: 0 },
     });  
+
 
     useEffect(() => {
         document.addEventListener("click", closeModalOutsideClick);
@@ -77,7 +88,7 @@ function AddTask() {
 
 
     return (
-        transition((style, showAddTaskModal) => showAddTaskModal ? (
+        transition((style, isAddTaskModal) => isAddTaskModal ? (
             <animated.div style={style} className={isDarkTheme ? "add-task-wrapper add-task-wrapper-dark" : "add-task-wrapper"}>
                 <div className='add-task-container'>
                     <h1>Add Task</h1>

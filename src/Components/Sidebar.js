@@ -10,7 +10,7 @@ import { BsMoonStarsFill } from "react-icons/bs";
 import { TiDelete } from "react-icons/ti";
 // Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleDarkTheme, hideSidebar, setActiveBoard } from "../Redux/ux";
+import { toggleDarkTheme, hideSidebar, setActiveBoard, toggleAddTask } from "../Redux/ux";
 
 function Sidebar() {
     const dispatch = useDispatch();
@@ -77,6 +77,12 @@ function Sidebar() {
     }
 
 
+    const testFnc = () => {
+        console.log("test");
+        dispatch(toggleAddTask);
+    }
+
+
     return (
         <div className={isDarkTheme ? "sidebar-wrapper sidebar-wrapper-dark" : "sidebar-wrapper"}>
             {/* ===================== Logo & Mobile Buttons ===================== */}
@@ -87,7 +93,7 @@ function Sidebar() {
                     <button onClick={() => setIsMobileCard(!isMobileCard)}>{isMobileCard ? <BiChevronUp /> : <BiChevronDown />}</button>
                 </div>
                 <div className='mobile-btns'>
-                    <button className='mobile-add'><IoIosAdd /></button>
+                    <button className='mobile-add' onClick={testFnc}><IoIosAdd /></button>
                     <div className='dropdown-wrapper' ref={mobilDropdownRef}>
                         <button className='mobile-menu' onClick={() => setIsDropdown(!isDropdown)}><HiEllipsisVertical /></button>
                         <div className={isDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
