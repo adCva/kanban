@@ -78,7 +78,6 @@ function Sidebar() {
 
 
     const testFnc = () => {
-        console.log("test");
         dispatch(toggleAddTask);
     }
 
