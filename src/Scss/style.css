@@ -834,6 +834,106 @@
   color: #e7e7e7;
 }
 
+.view-task-wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-task-wrapper .view-task-container {
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  min-width: 400px;
+  max-width: 400px;
+  min-height: 400px;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: all 0.25s ease-in-out;
+}
+@media (min-width: 768px) {
+  .view-task-wrapper .view-task-container {
+    padding: 1.2rem 1.5rem;
+  }
+}
+.view-task-wrapper .view-task-container .title-and-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.view-task-wrapper .view-task-container .title-and-btn h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+.view-task-wrapper .view-task-container .title-and-btn button {
+  background: transparent;
+  font-size: 1.5rem;
+}
+.view-task-wrapper .view-task-container p {
+  letter-spacing: -0.3px;
+  line-height: 1.1;
+  margin: 0.75rem 0 1.5rem;
+  opacity: 0.75;
+}
+.view-task-wrapper .view-task-container .view-task-subtasks-wrapper h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.view-task-wrapper .view-task-container .view-task-subtasks-wrapper .view-task-subtask-container {
+  background-color: #f2f6fd;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+.view-task-wrapper .view-task-container .view-task-subtasks-wrapper .view-task-subtask-container:last-of-type {
+  margin-bottom: 0;
+}
+.view-task-wrapper .view-task-container .view-task-subtasks-wrapper .view-task-subtask-container label {
+  letter-spacing: -0.3px;
+}
+.view-task-wrapper .view-task-container .view-task-subtasks-wrapper .view-task-subtask-container label s {
+  opacity: 0.5;
+}
+.view-task-wrapper .view-task-container .view-task-status-container {
+  margin-top: 1.5rem;
+  display: grid;
+}
+.view-task-wrapper .view-task-container .view-task-status-container h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.view-task-wrapper .view-task-container .view-task-status-container select {
+  background: transparent;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  border: 1px solid #e5ecfa;
+}
+.view-task-wrapper .view-task-container-dark {
+  background-color: #2b2c36;
+  color: #ffffff;
+}
+.view-task-wrapper .view-task-container-dark .title-and-btn button {
+  color: #ffffff;
+}
+.view-task-wrapper .view-task-container-dark .view-task-subtasks-wrapper .view-task-subtask-container {
+  background-color: #20212c;
+}
+.view-task-wrapper .view-task-container-dark .view-task-status-container select {
+  background-color: #2b2c36;
+  color: #ffffff;
+}
+.view-task-wrapper .view-task-container-dark .view-task-status-container select option {
+  background-color: #20212c;
+}
+
 .App {
   height: 100vh;
   height: 100dvh;

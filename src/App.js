@@ -6,6 +6,7 @@ import './Reset.css';
 import "./Scss/style.css";
 import { useSelector } from 'react-redux';
 import Navbar from './Components/Navbar';
+import ViewTask from './Components/ViewTask';
 
 function App() {
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
@@ -15,12 +16,10 @@ function App() {
     <div className={isDarkTheme ? "App App-Dark" : "App"}>
       <div className={isSidebarHidden ? "sidebar-hide" : "sidebar-show"}>
         <div className='left'>
-          <Sidebar />
+          <ViewTask />
         </div>
         <div className='right'>
-          <Tasks />
-          <AddTask />
-          <ShowSidebar />
+
         </div>
       </div>
     </div>
