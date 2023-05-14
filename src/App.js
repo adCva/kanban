@@ -1,26 +1,22 @@
-import Tasks from './Components/Tasks';
-import ShowSidebar from './Components/ShowSidebar';
-import Sidebar from './Components/Sidebar';
-import AddTask from './Components/AddTask';
 import './Reset.css';
 import "./Scss/style.css";
 import { useSelector } from 'react-redux';
-import Navbar from './Components/Navbar';
-import ViewTask from './Components/ViewTask';
+// ===== Components.
+import Sidebar from './Components/Sidebar';
 
 function App() {
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
   const isSidebarHidden = useSelector((state) => state.ux.isSidebarHidden);
 
   return (
-    <div className={isDarkTheme ? "App App-Dark" : "App"}>
-      <div className={isSidebarHidden ? "sidebar-hide" : "sidebar-show"}>
-        <div className='left'>
-          <ViewTask />
-        </div>
-        <div className='right'>
+    <div className={isDarkTheme ? "App" : "App light-theme"}>
+      <div className={isSidebarHidden ? "sidebar sidebar-hide" : "sidebar"}>
 
+        <div className='sidebar-content'>
+          <Sidebar />
         </div>
+        <div className='main-content'>B</div>
+
       </div>
     </div>
   );

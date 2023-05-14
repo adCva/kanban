@@ -1,49 +1,38 @@
 @import "config";
-@import "sidebar";
-@import "menu";
-@import "showSidebar";
-@import "tasks";
-@import "addTask";
-@import "viewTask";
 
 
 .App {
+    @include theme('dark');
     height: 100vh;
     height: 100dvh;
-    transition: $transition;
-    background-color: $lt-main-bg;
-}
 
-.App-Dark {
-    background-color: $dt-main-bg;
-}
-
-
-.sidebar-show {
-    transition: $transition;
-
-    @media (min-width: 1000px) {
-        display: grid;
-        grid-template-columns: 25% 75%;
+    &.light-theme {
+        @include theme('light');
     }
 
-    @media (min-width: 1300px) {
-        display: grid;
-        grid-template-columns: 15% 85%;
-    }
-}
 
-.sidebar-hide {
-    transition: $transition;
+    // ==================== Sidebar.
+    .sidebar {
+        @media (min-width: 1000px) {
+            display: grid;
+            grid-template-columns: 25% 75%;
+        }
 
-    @media (min-width: 1000px) {
-        display: grid;
-        grid-template-columns: 0 100%;
-    }
+        @media (min-width: 1300px) {
+            display: grid;
+            grid-template-columns: 15% 85%;
+        }
 
-    @media (min-width: 1300px) {
-        display: grid;
-        grid-template-columns: 0 100%;
+
+        &.sidebar-hide {
+            @media (min-width: 1000px) {
+                grid-template-columns: 0 100%;
+            }
+        
+            @media (min-width: 1300px) {
+                grid-template-columns: 0 100%;
+            }
+        }
     }
 }
 
@@ -54,6 +43,9 @@
 
 
 
+
+
+/*
 
 .subtask-checkbox {
     display: flex;
@@ -111,3 +103,4 @@
         transform: scaleY(0.3);
     }
 }
+*/
