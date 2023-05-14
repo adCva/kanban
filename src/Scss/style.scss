@@ -1,18 +1,36 @@
 @import "config";
+@import "sidebar";
+@import "showSidebar";
 
 
 .App {
     @include theme('dark');
+    @include colorTransition;
     height: 100vh;
     height: 100dvh;
+    font-family: $main-font;
+
+
+    .main-content {
+        background-color: $very-dark-blue;
+        @include colorTransition;
+    }
+
 
     &.light-theme {
         @include theme('light');
+
+
+        .main-content {
+            background-color: $ghost-white;
+        }
     }
 
 
     // ==================== Sidebar.
     .sidebar {
+        transition: all 0.4s ease-in-out;
+        
         @media (min-width: 1000px) {
             display: grid;
             grid-template-columns: 25% 75%;

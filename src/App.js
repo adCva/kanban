@@ -3,6 +3,8 @@ import "./Scss/style.css";
 import { useSelector } from 'react-redux';
 // ===== Components.
 import Sidebar from './Components/Sidebar';
+import ShowSidebar from './Components/ShowSidebar';
+import Temp from './Components/Temp';
 
 function App() {
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
@@ -14,9 +16,12 @@ function App() {
 
         <div className='sidebar-content'>
           <Sidebar />
+          <ShowSidebar />
         </div>
-        <div className='main-content'>B</div>
-
+        <div className='main-content'>
+          <Temp />
+        </div>
+  
       </div>
     </div>
   );

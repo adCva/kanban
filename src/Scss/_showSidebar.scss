@@ -1,24 +1,24 @@
 .show-sidebar-container {
-    background-color: $lt-purple;
-    color: $lt-sidebar-bg;
+    background-color: $dark-theme-purple;
+    color: $almost-white;
     display: none;
-    padding: 0.8rem 1rem 0.8rem 1.3rem;
+    padding: 0.7rem 1rem 0.7rem 0.6rem;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: $transition;
+    transition: all 0.25s ease-in-out;
     transition-delay: 0.25s;
 
     &:hover {
-        background-color: lighten($lt-purple, 5%);
+        background-color: lighten($dark-theme-purple, 10%);
     }
 
 
     @media (min-width: 1000px) {
         display: inline-block;
         position: fixed;
-        bottom: 4.8rem;
+        bottom: 4.5rem;
         left: 0;
     }
 }

@@ -1,7 +1,8 @@
 // ======= Typography.
-$main-font: 'Ubuntu', sans-serif;
+$main-font: 'Noto Sans', sans-serif;
 $main-font-regular: 400;
 $main-font-medium: 500;
+$main-font-semi-bold: 600;
 $main-font-bold: 700;
 
 
@@ -26,18 +27,19 @@ $gray: #aeafb0;
 $skyblue: #70c2ce;
 $medium-purple: #8479c8;
 $turquoise: #90cdbd;
+$red: #ef7c8e;
 
 
 // ======= Mixing.
 @mixin theme($theme) {
     @if $theme == 'dark' {
-        background-color: $dark-grayish-blue;
+        background-color: $very-dark-blue;
         color: $almost-white;
         transition-property: background-color, color;
         transition-duration: 0.25s;
         transition-timing-function: ease-in-out;
     } @else if $theme == 'light' {
-        background-color: $white;
+        background-color: $ghost-white;
         color: $black;
         transition-property: background-color, color;
         transition-duration: 0.25s;
@@ -47,6 +49,12 @@ $turquoise: #90cdbd;
     }
 }
 
+
+@mixin colorTransition() {
+    transition-property: background-color, color;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
 
 
 
