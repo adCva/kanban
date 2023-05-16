@@ -18,6 +18,7 @@ function Sidebar() {
     const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
     const isSidebarHidden = useSelector((state) => state.ux.isSidebarHidden);
     const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
+    const boardsTitles = useSelector((state) => state.boards.boards);
 
     // ===== Local state.
     const [isMobileCard, setIsMobileCard] = useState(true);
@@ -109,11 +110,13 @@ function Sidebar() {
 
                         {/* =========== Boards List =========== */}
                         <div className='active-boards-container'>
-                            <cite>All Boards (3)</cite>
+                            <cite>All Boards ({boardsTitles.length})</cite>
                             <div className={isSidebarHidden ? "active-boards active-boards-hide" : "active-boards"} >
-                                <button className='board-btn active-board-btn' onClick={() => changeBoard("Board #1")} >Board #1</button>
-                                <button className='board-btn' onClick={() => changeBoard("Board #2")} >Board #2</button>
-                                <button className='board-btn' onClick={() => changeBoard("Board #3")} >Board #3</button>
+                                {boardsTitles.map((el, i) => {
+                                    return (
+                                        <button key={i} className={currentActiveBoard === el.name ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard(el.name)}>{el.name}</button>
+                                    )
+                                })}
                             </div>
                         </div>
 

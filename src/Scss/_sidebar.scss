@@ -40,6 +40,7 @@
 
                     .dropdown-container {
                         background-color: $white !important;
+                        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
                         .edit-board-btn {
                             color: $gray !important;
@@ -100,6 +101,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem 1.5rem;
+        @include colorTransition;
 
         @media (min-width: 768px) {
             padding: 1.2rem 1.5rem;
@@ -112,7 +114,7 @@
             justify-content: center;
             align-items: center;
             gap: 0.8rem;
-
+            @include colorTransition;
 
             .logo {
                 background: url("../Assets/logo-mobile.svg") center/cover no-repeat;
@@ -231,7 +233,7 @@
 
                 .dropdown-container {
                     position: absolute;
-                    top: 35px;
+                    top: 47px;
                     right: 15px;
                     width: 170px;
                     height: 110px;
@@ -244,14 +246,16 @@
                     transform: scale(1, 1);
                     transform-origin: top;
                     transition: transform 0.25s ease-in-out;
+                    box-shadow: rgba(212, 212, 212, 0.15) 1.95px 1.95px 2.6px;
+                    z-index: 999;
 
                     &.dropdown-container-hide {
                         transform: scale(1, 0);
                     }
 
                     @media (min-width: 768px) {
-                        top: 50px;
-                        right: 20px;
+                        top: 63px;
+                        right: 25px;
                     }
 
 
@@ -287,6 +291,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 999;
 
         @media (min-width: 1000px) {
             all: unset;
