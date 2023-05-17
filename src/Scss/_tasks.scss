@@ -1,38 +1,124 @@
-// ============================================ Light Theme, Default Theme.
 .tasks-wrapper {
+    background-color: $dark-grayish-blue;
+    @include colorTransition;
 
-    // ========= Topbar Container.
+    &.tasks-wrapper-light {
+        background-color: $white;
+
+        .topbar-container {
+            background-color: $white;
+
+            .topbar-info {
+                h3 {
+                    color: darken($gray, 35%);
+                }
+            }
+            
+            .topbar-btns {
+                .add-btn {
+                    background: $light-theme-purple;
+                    color: $white;
+                }
+
+                .dropdown-wrapper {
+                    .mobile-menu {
+                        color: $gray !important;
+                    }
+
+                    .dropdown-container {
+                        background-color: $white !important;
+                        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+                        .edit-board-btn {
+                            color: $gray !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tasks-container {
+            background-color: $ghost-white;
+
+            .status-group {
+                .status-cards-container {
+                    .task-card {
+                        background-color: $white;
+                        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+                        &:hover {
+                            background-color: $alice-blue;
+                        }
+                    }
+                }
+            }
+
+            .add-column-btn {
+                background-color: $alice-blue;
+                color: darken(#818ea2, 20%);
+
+                &:hover {
+                    background-color: darken($alice-blue, 5%);
+                }
+            }
+        }
+    
+        .tasks-container-empty {
+            background-color: $ghost-white;
+
+            h1 {
+                color: $black;
+            }
+    
+            button {
+                background-color: $light-theme-purple;
+                color: $ghost-white;
+    
+                &:hover {
+                    background-color: darken($light-theme-purple, 10%);
+                }
+            }
+        }
+    }
+
+
+    // ================== Topbar Container.
     .topbar-container {
-        background-color: $lt-sidebar-bg;
+        background-color: $dark-grayish-blue;
+        padding: 1rem 1.5rem;
         display: none;
         justify-content: space-between;
         align-items: center;
-        padding: 0.9rem 1.5rem;
-        transition: $transition;
+        @include colorTransition;
 
         @media (min-width: 1000px) {
             display: flex;
         }
 
 
+        // ================== Topbar Info.
         .topbar-info {
             display: flex;
             align-items: center;
             gap: 0.5rem; 
-
 
             .topbar-logo {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 position: initial;
-                transition: $transition;
+                transition: transform 0.25s ease-in-out;
                 transform: scale(1, 1);
+
+                &.topbar-logo-hide {
+                    position: absolute;
+                    transform: scale(0, 0);
+                }
 
                 .line {
                     width: 6px;
-                    height: 25px;
-                    margin: 0 2px;
+                    height: 23px;
+                    margin: 0 1.5px;
                     background-color: #635fc7;
                     border-radius: 3px;
             
@@ -46,112 +132,103 @@
                 }
             }
 
-            .topbar-logo-hide {
-                position: absolute;
-                transform: scale(0, 0);
-            }
-
             h3 {
-                color: darken($lt-text-light, 20%);
-                font-size: 1.2rem;
-                font-weight: $font-bold;
-                transition: $transition;
+                color: $almost-white;
+                font-size: 1rem;
+                font-weight: $main-font-semi-bold;
+                letter-spacing: -0.3px;
+                user-select: none;
             }
         }
 
 
-        // ====== Topbar Buttons.
+        // ================== Topbar Buttons.
         .topbar-btns {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 1rem;
-            position: relative;
 
 
             .add-btn {
-                background: $dt-purple;
-                color: $lt-main-bg;
+                background: $almost-white;
+                color: $dark-grayish-blue;
                 font-size: 0.9rem;
-                font-weight: $font-bold;
+                font-weight: $main-font-semi-bold;
                 display: inline-flex;
-                padding: 0.75rem 1.4rem;
+                padding: 0.65rem 1.3rem 0.65rem 0.9rem;
                 border-radius: 50px;
                 cursor: pointer;
-                transition: $transition;
-
-                &:hover {
-                    background: lighten($dt-purple, 10%);
-                }
+                @include colorTransition;
             }
 
 
-            // ====== Dropdown.
             .dropdown-wrapper {
+                .mobile-menu {
+                    background: none;
+                    color: $almost-white;
+                    font-size: 1.9rem;
+                    @include colorTransition;
+                }
+
                 .dropdown-container {
-                    background-color: $dt-main-bg;
+                    position: absolute;
+                    top: 57px;
+                    right: 23px;
+                    width: 170px;
+                    height: 110px;
+                    background-color: $dark-grayish-blue;
                     display: grid;
                     justify-items: start;
                     gap: 1rem;
-                    position: absolute;
-                    top: 35px;
-                    right: 15px;
-                    width: 170px;
-                    height: 110px;
                     padding: 1.2rem 1rem;
                     border-radius: 10px 0 10px 10px;
                     transform: scale(1, 1);
                     transform-origin: top;
-                    transition: $transition;
+                    transition: transform 0.25s ease-in-out;
+                    box-shadow: rgba(212, 212, 212, 0.15) 1.95px 1.95px 2.6px;
 
-                    @media (min-width: 768px) {
-                        top: 50px;
-                        right: 20px;
+                    &.dropdown-container-hide {
+                        transform: scale(1, 0);
                     }
 
                     button {
-                        background: transparent;                        
+                        background: transparent;
                         display: flex;
                         align-items: center;
                         gap: 0.5rem;
+                        cursor: pointer;
                     }
 
                     .edit-board-btn {
-                        color: #d8e2dc;
+                        color: $almost-white;
                     }
 
                     .delete-board-btn {
-                        color: #ef233c;
+                        color: $red;
                     }
                 }
-            
-                .dropdown-container-hide {
-                    transform: scale(1, 0);
-                }
-            }
-
-
-            .mobile-menu {
-                background: none;
-                color: darken($lt-text-light, 20%);
-                font-size: 1.9rem;
-                display: inline-flex;
-                height: 20px;
-                cursor: pointer;
             }
         }
     }
 
 
-    // ========= Tasks container.
+    // ========= Tasks Content Container.
     .tasks-container {
-        min-height: calc(100vh - 4.3rem);
-        @extend %padding;
+        background-color: $very-dark-blue;
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        @include colorTransition;
 
         @media (min-width: 1000px) {
             display: grid;
             grid-template-columns: repeat(4, auto);
             grid-auto-rows: auto;
-            gap: 2rem;
+            gap: 1rem;
         }
 
 
@@ -160,140 +237,134 @@
             scrollbar-width: none;
             &::-webkit-scrollbar {
                 display: none;
-            }
-            
+            }        
+
+
             h1 {
-                color: $lt-text;
                 display: flex;
                 align-items: center;
                 gap: 0.7rem;
                 margin-bottom: 1.5rem;
-                transition: $transition;
+                font-size: 0.9rem;
 
                 span {
                     display: inline-block;
-                    width: 12px;
-                    height: 12px;
+                    width: 10px;
+                    height: 10px;
                     margin-left: 0.5rem;
                     border-radius: 50px;
                 }
 
                 .todo-span {
-                    background-color: #49c4e5;
+                    background-color: $skyblue;
                 }
 
                 .doing-span {
-                    background-color: #67e2ae;
+                    background-color: $medium-purple;
                 }
 
                 .done-span {
-                    background-color: #8471f2;
+                    background-color: $turquoise;
                 }
             }
 
+
             .status-cards-container {
+                display: grid;
+                gap: 1rem;
+                overflow-y: auto;
+                scrollbar-width: none;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                padding: 0.5rem 0;
+
+
                 .task-card {
-                    background-color: $lt-sidebar-bg;
-                    color: darken($lt-text-light, 20%);
-                    max-width: 400px;
-                    @extend %padding;
+                    background-color: $dark-grayish-blue;
+                    padding: 1rem 1.5rem;
                     border-radius: 10px;
-                    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
                     cursor: pointer;
-                    transition: $transition;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                    @include colorTransition;
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                    &:hover {
+                        background-color: lighten($dark-grayish-blue, 5%);
+                    }
 
                     h2 {
-                        font-size: 1.05rem;
-                        font-weight: $font-bold;
+                        font-size: 0.95rem;
+                        font-weight: $main-font-semi-bold;
                         margin-bottom: 1rem;
                     }
 
                     p {
-                        font-size: 0.9rem;
+                        font-size: 0.8rem;
+                        opacity: 0.7;
                     }
+
                 }
             }
         }
 
-        .add-column-btn {
-            background-color: darken($lt-main-bg, 0.5%);
-            color: darken($lt-text-light, 20%);
-            font-size: 1.05rem;
-            font-weight: $font-bold;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            transition: $transition;
-        }
 
-        .new-column-btn-full-width {
-            grid-column: 1 / -1;
+        .add-column-btn {
+            background-color: darken(#2b2c36, 0.5%);
+            color: $almost-white;
+            padding: 3rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            @include colorTransition;
+            width: 100%;
+            margin-top: 2rem;
+
+            &:hover {
+                background-color: lighten($dark-grayish-blue, 5%);
+            }
+
+            @media (min-width: 1000px) {
+                padding: 0 1rem;
+                margin-top: 0;
+                min-height: calc(100vh - 8.5rem);
+            }
         }
     }
-
 
     .tasks-container-empty {
+        background-color: $very-dark-blue;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: calc(100vh - 4.3rem);
-    }
-}
+        gap: 1rem;
+        min-height: calc(100vh - 4.3rem);
+        @include colorTransition;
 
 
-
-// ============================================ Dark Theme.
-.tasks-wrapper-dark {
-    // ========= Topbar Container.
-    .topbar-container {
-        background-color: $dt-sidebar-bg;
-        color: $dt-text;
-
-        .topbar-info {
-            h3 {
-                color: $dt-text
-            }
+        h1 {
+            color: $almost-white;
+            @include colorTransition;
         }
 
+        button {
+            background-color: $almost-white;
+            color: $very-dark-blue;
+            font-size: 0.9rem;
+            font-weight: $main-font-semi-bold;
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            @include colorTransition;
 
-        // ====== Topbar Buttons.
-        .topbar-btns {
-            .dropdown-wrapper {
-                .dropdown-container {
-                    background-color: $lt-main-bg;
-
-                    .edit-board-btn {
-                        color: #344e41;
-                    }
-                }
-            }
-            .mobile-menu {
-                color: darken($dt-text, 20%);
+            &:hover {
+                background-color: darken($almost-white, 5%);
             }
         }
     }
 
-
-    // ========= Tasks container.
-    .tasks-container {
-        .status-group {
-            h1 {
-                color: $dt-text;
-            }
-
-            .status-cards-container {
-                .task-card {
-                    background-color: $dt-sidebar-bg;
-                    color: $dt-text;
-                    box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
-                }
-            }
-        }
-
-        .add-column-btn {
-            background-color: lighten($dt-sidebar-bg, 0.5%);
-            color: $dt-text;
-            box-shadow: rgba(141, 141, 141, 0.2) 0px 2px 8px 0px;
-        }
-    }
 }

@@ -804,18 +804,16 @@ $transition: all 0.25s ease-in-out;
   overflow-y: auto;
   scrollbar-width: none;
   padding: 0.5rem 0;
-  max-width: 350px;
 }
 .tasks-wrapper .tasks-container .status-group .status-cards-container::-webkit-scrollbar {
   display: none;
 }
 .tasks-wrapper .tasks-container .status-group .status-cards-container .task-card {
   background-color: #2c2c36;
-  max-width: 300px;
   padding: 1rem 1.5rem;
   border-radius: 10px;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition-property: background-color, color;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
@@ -840,15 +838,24 @@ $transition: all 0.25s ease-in-out;
 .tasks-wrapper .tasks-container .add-column-btn {
   background-color: #2a2b35;
   color: #fafbff;
-  padding: 0 1rem;
+  padding: 3rem 0;
   border-radius: 10px;
   cursor: pointer;
   transition-property: background-color, color;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
+  width: 100%;
+  margin-top: 2rem;
 }
 .tasks-wrapper .tasks-container .add-column-btn:hover {
   background-color: #373744;
+}
+@media (min-width: 1000px) {
+  .tasks-wrapper .tasks-container .add-column-btn {
+    padding: 0 1rem;
+    margin-top: 0;
+    min-height: calc(100vh - 8.5rem);
+  }
 }
 .tasks-wrapper .tasks-container-empty {
   background-color: #22222e;

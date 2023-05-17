@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 // ===== Components.
 import Sidebar from './Components/Sidebar';
 import ShowSidebar from './Components/ShowSidebar';
-import Temp from './Components/Temp';
+import Tasks from './Components/Tasks';
+
 
 function App() {
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
@@ -19,7 +20,7 @@ function App() {
           <ShowSidebar />
         </div>
         <div className='main-content'>
-          <Temp />
+          <Tasks />
         </div>
   
       </div>
