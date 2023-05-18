@@ -223,6 +223,8 @@
             display: none;
         }
         @include colorTransition;
+        display: grid;
+        gap: 2rem;
 
         @media (min-width: 1000px) {
             display: grid;
@@ -265,6 +267,10 @@
 
                 .done-span {
                     background-color: $turquoise;
+                }
+
+                .random-color-span {
+                    background-color: random-color();
                 }
             }
 
@@ -321,7 +327,6 @@
             cursor: pointer;
             @include colorTransition;
             width: 100%;
-            margin-top: 2rem;
 
             &:hover {
                 background-color: lighten($dark-grayish-blue, 5%);
@@ -329,7 +334,6 @@
 
             @media (min-width: 1000px) {
                 padding: 0 1rem;
-                margin-top: 0;
                 min-height: calc(100vh - 8.5rem);
             }
         }

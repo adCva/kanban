@@ -208,7 +208,7 @@
                     padding: 0.6rem 1rem 0.6rem 0.6rem;
 
                     &::after {
-                        content: "Add New Board";
+                        content: "Add New Task";
                         font-size: 0.9rem;
                     }
                 }
@@ -331,13 +331,14 @@
 
             // ====== Active Boards Container.
             .active-boards-container {
+                // background-color: red;
                 display: block;
                 overflow-y: auto;
                 scrollbar-width: none;
                 &::-webkit-scrollbar {
                     display: none;
                 }
-                margin-top: 1rem;
+                margin-top: 0.3rem;
 
                 @media (min-width: 1000px) {
                     margin-top: 2rem;
@@ -346,7 +347,7 @@
                 cite {
                     font-weight: $main-font-bold;
                     color: lighten($gray, 30%);
-                    // display: block;
+                    display: block;
                     padding: 1.5rem 1.5rem;
                     font-size: 0.95rem;
                     @include colorTransition;
@@ -354,7 +355,6 @@
 
 
                 .active-boards {
-                    margin-top: 1rem;
                     max-height: 300px;
                     overflow-y: auto;
                     scrollbar-width: none;
@@ -393,6 +393,37 @@
                         &.active-board-btn {
                             background-color: $dark-theme-purple;
                             color: $almost-white;
+                        }
+
+                        span {
+                            font-size: 1rem;
+
+                            @media (min-width: 768px) {
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
+                }
+
+
+                .new-board-btn {
+                    background: transparent;
+                    color: $dark-theme-purple;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-size: 0.9rem;
+                    font-weight: $main-font-bold;
+                    letter-spacing: 1px;
+                    padding: 1rem 1.5rem;
+                    cursor: pointer;
+                    margin-top: 1rem;
+
+                    span {
+                        font-size: 1rem;
+
+                        @media (min-width: 768px) {
+                            font-size: 1.2rem;
                         }
                     }
                 }

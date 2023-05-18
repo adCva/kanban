@@ -30,6 +30,21 @@ function Temp() {
     }
   };
 
+
+  // ===== Decide task status group span class color.
+  const decideStatusGroupSpanClassColor = (status) => {
+    if (status === "to do") {
+      return "todo-span";
+    } else if (status === "doing") {
+      return "doing-span";
+    } else if (status === "done") {
+      return "done-span";
+    } else {
+      return "random-color-span";
+    }
+  }
+
+
   useEffect(() => {
     document.addEventListener("click", closeTasksDropdownOutsideClick);
 
@@ -55,7 +70,7 @@ function Temp() {
           </div>
 
           <div className='topbar-btns'>
-            <button className='add-btn'>+ Add New Board</button>
+            <button className='add-btn'>+ Add New Task</button>
             <div className='dropdown-wrapper' ref={dropdownRef} >
               <button className='mobile-menu' onClick={() => setIsDropdownActive(!isDropdownActive)} ><HiEllipsisVertical /></button>
               <div className={isDropdownActive ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
@@ -72,39 +87,21 @@ function Temp() {
           <div className='tasks-container' key={i}>
 
             <div className='status-group'>
-              <h1><span className='todo-span'></span> To Do ({board.tasks.filter(stat => stat.task_status === "todo").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "todo" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-                </div>                  
-              ) : null)}
-            </div>
-
-            <div className='status-group'>
-              <h1><span className='doing-span'></span> Doing ({board.tasks.filter(stat => stat.task_status === "doing").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "doing" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-              </div>                  
-              ) : null)}
-            </div>
-
-            <div className='status-group'>
-              <h1><span className='done-span'></span> Done ({board.tasks.filter(stat => stat.task_status === "done").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "done" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-                </div>                  
-              ) : null)}              
+              {[... new Set(board.tasks.map(status => status.task_status))].map(status => {
+                return (
+                  <>
+                    <h1><span className={decideStatusGroupSpanClassColor(status)}></span> {status} ({board.tasks.filter(stat => stat.task_status === status).length})</h1>
+                    {board.tasks.map((el, j) => el.task_status === status ? (
+                      <div className='status-cards-container'>
+                        <div className='task-card' onClick={() => console.log([... new Set(board.tasks.map(status => status.task_status))].map(el => el))}>
+                          <h2>{el.task_title}</h2>
+                          <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
+                        </div>
+                      </div>                  
+                    ) : null)}
+                  </>
+                )
+              })}
             </div>
 
             <button className='add-column-btn'>+ New Column</button>

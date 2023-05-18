@@ -19,7 +19,7 @@ export const boards = createSlice({
                                 subtask_status: "incomplete"
                             }
                         ],
-                        task_status: "todo"
+                        task_status: "to do",
                     },
                     {
                         task_title: "Add search endpoints",
@@ -44,7 +44,7 @@ export const boards = createSlice({
                     {
                         task_title: "Build UI for onboarding",
                         subtasks: [],
-                        task_status: "todo"
+                        task_status: "to do"
                     },
                     {
                         task_title: "Build UI for search",
@@ -55,6 +55,16 @@ export const boards = createSlice({
                         task_title: "Create wireframe prototype.",
                         subtasks: [],
                         task_status: "done"
+                    },
+                    {
+                        task_title: "Create wireframe prototype.",
+                        subtasks: [],
+                        task_status: "idea"
+                    },
+                    {
+                        task_title: "Conduct 5 wireframe tests.",
+                        subtasks: [],
+                        task_status: "terminator"
                     }
                 ]
             },

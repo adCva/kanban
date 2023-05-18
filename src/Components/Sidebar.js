@@ -8,7 +8,7 @@ import { BiChevronUp, BiChevronDown, BiHide, BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
 import { HiEllipsisVertical, HiSun } from "react-icons/hi2";
 import { TiDelete } from "react-icons/ti";
-import { BsMoonStarsFill } from "react-icons/bs";
+import { BsMoonStarsFill, BsClipboard2Plus, BsClipboard2Check, BsClipboard2 } from "react-icons/bs";
 
 
 function Sidebar() {
@@ -114,11 +114,14 @@ function Sidebar() {
                             <div className={isSidebarHidden ? "active-boards active-boards-hide" : "active-boards"} >
                                 {boardsTitles.map((el, i) => {
                                     return (
-                                        <button key={i} className={currentActiveBoard === el.name ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard(el.name)}>{el.name}</button>
+                                        <button key={i} className={currentActiveBoard === el.name ? "board-btn active-board-btn" : "board-btn"} onClick={() => changeBoard(el.name)}><span>{currentActiveBoard === el.name ? <BsClipboard2Check /> : <BsClipboard2 />}</span>{el.name}</button>
                                     )
                                 })}
                             </div>
+
+                            <button className='new-board-btn'><span><BsClipboard2Plus /></span>+ Create New Board</button>
                         </div>
+
 
                         {/* =========== Theme Btn Container =========== */}
                         <div className={isSidebarHidden ? "theme-btn-wrapper theme-btn-wrapper-hide" : "theme-btn-wrapper"}>

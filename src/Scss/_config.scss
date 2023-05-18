@@ -57,6 +57,11 @@ $red: #ef7c8e;
 }
 
 
+@function random-color() {
+    @return rgb(random(255), random(255), random(255));
+}
+
+
 
 
 

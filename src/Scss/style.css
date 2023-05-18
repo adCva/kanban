@@ -287,7 +287,7 @@ $transition: all 0.25s ease-in-out;
     padding: 0.6rem 1rem 0.6rem 0.6rem;
   }
   .sidebar-wrapper .logo-wrapper .mobile-btns .mobile-add::after {
-    content: "Add New Board";
+    content: "Add New Task";
     font-size: 0.9rem;
   }
 }
@@ -402,7 +402,7 @@ $transition: all 0.25s ease-in-out;
   display: block;
   overflow-y: auto;
   scrollbar-width: none;
-  margin-top: 1rem;
+  margin-top: 0.3rem;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container::-webkit-scrollbar {
   display: none;
@@ -415,6 +415,7 @@ $transition: all 0.25s ease-in-out;
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container cite {
   font-weight: 700;
   color: #fbfcfc;
+  display: block;
   padding: 1.5rem 1.5rem;
   font-size: 0.95rem;
   transition-property: background-color, color;
@@ -422,7 +423,6 @@ $transition: all 0.25s ease-in-out;
   transition-timing-function: ease-in-out;
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards {
-  margin-top: 1rem;
   max-height: 300px;
   overflow-y: auto;
   scrollbar-width: none;
@@ -464,6 +464,35 @@ $transition: all 0.25s ease-in-out;
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards .board-btn.active-board-btn {
   background-color: #655fb7;
   color: #fafbff;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards .board-btn span {
+  font-size: 1rem;
+}
+@media (min-width: 768px) {
+  .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .active-boards .board-btn span {
+    font-size: 1.2rem;
+  }
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .new-board-btn {
+  background: transparent;
+  color: #655fb7;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .new-board-btn span {
+  font-size: 1rem;
+}
+@media (min-width: 768px) {
+  .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .active-boards-container .new-board-btn span {
+    font-size: 1.2rem;
+  }
 }
 .sidebar-wrapper .sidebar-content-wrapper .sidebar-content-container .theme-btn-wrapper {
   display: grid;
@@ -756,6 +785,8 @@ $transition: all 0.25s ease-in-out;
   transition-property: background-color, color;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
+  display: grid;
+  gap: 2rem;
 }
 .tasks-wrapper .tasks-container::-webkit-scrollbar {
   display: none;
@@ -797,6 +828,9 @@ $transition: all 0.25s ease-in-out;
 }
 .tasks-wrapper .tasks-container .status-group h1 .done-span {
   background-color: #90cdbd;
+}
+.tasks-wrapper .tasks-container .status-group h1 .random-color-span {
+  background-color: rgb(195, 79, 170);
 }
 .tasks-wrapper .tasks-container .status-group .status-cards-container {
   display: grid;
@@ -845,7 +879,6 @@ $transition: all 0.25s ease-in-out;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
   width: 100%;
-  margin-top: 2rem;
 }
 .tasks-wrapper .tasks-container .add-column-btn:hover {
   background-color: #373744;
@@ -853,7 +886,6 @@ $transition: all 0.25s ease-in-out;
 @media (min-width: 1000px) {
   .tasks-wrapper .tasks-container .add-column-btn {
     padding: 0 1rem;
-    margin-top: 0;
     min-height: calc(100vh - 8.5rem);
   }
 }
