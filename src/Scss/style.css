@@ -793,10 +793,8 @@ $transition: all 0.25s ease-in-out;
 }
 @media (min-width: 1000px) {
   .tasks-wrapper .tasks-container {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-auto-rows: auto;
-    gap: 1rem;
+    display: flex;
+    justify-content: space-between;
   }
 }
 .tasks-wrapper .tasks-container .status-group {
@@ -806,43 +804,49 @@ $transition: all 0.25s ease-in-out;
 .tasks-wrapper .tasks-container .status-group::-webkit-scrollbar {
   display: none;
 }
-.tasks-wrapper .tasks-container .status-group h1 {
+@media (min-width: 1000px) {
+  .tasks-wrapper .tasks-container .status-group {
+    display: flex;
+    gap: 1rem;
+  }
+}
+.tasks-wrapper .tasks-container .status-group .task-card h1 {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
-.tasks-wrapper .tasks-container .status-group h1 span {
+.tasks-wrapper .tasks-container .status-group .task-card h1 span {
   display: inline-block;
   width: 10px;
   height: 10px;
   margin-left: 0.5rem;
   border-radius: 50px;
 }
-.tasks-wrapper .tasks-container .status-group h1 .todo-span {
+.tasks-wrapper .tasks-container .status-group .task-card h1 .todo-span {
   background-color: #70c2ce;
 }
-.tasks-wrapper .tasks-container .status-group h1 .doing-span {
+.tasks-wrapper .tasks-container .status-group .task-card h1 .doing-span {
   background-color: #8479c8;
 }
-.tasks-wrapper .tasks-container .status-group h1 .done-span {
+.tasks-wrapper .tasks-container .status-group .task-card h1 .done-span {
   background-color: #90cdbd;
 }
-.tasks-wrapper .tasks-container .status-group h1 .random-color-span {
-  background-color: rgb(195, 79, 170);
+.tasks-wrapper .tasks-container .status-group .task-card h1 .random-color-span {
+  background-color: rgb(29, 2, 152);
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container {
   display: grid;
   gap: 1rem;
   overflow-y: auto;
   scrollbar-width: none;
   padding: 0.5rem 0;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container::-webkit-scrollbar {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container::-webkit-scrollbar {
   display: none;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container .task-card {
   background-color: #2c2c36;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -854,18 +858,18 @@ $transition: all 0.25s ease-in-out;
   overflow-y: auto;
   scrollbar-width: none;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card::-webkit-scrollbar {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container .task-card::-webkit-scrollbar {
   display: none;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card:hover {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container .task-card:hover {
   background-color: #373744;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card h2 {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container .task-card h2 {
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
-.tasks-wrapper .tasks-container .status-group .status-cards-container .task-card p {
+.tasks-wrapper .tasks-container .status-group .task-card .status-cards-container .task-card p {
   font-size: 0.8rem;
   opacity: 0.7;
 }

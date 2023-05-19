@@ -89,7 +89,7 @@ function Temp() {
             <div className='status-group'>
               {[... new Set(board.tasks.map(status => status.task_status))].map(status => {
                 return (
-                  <>
+                  <div className='task-card'>
                     <h1><span className={decideStatusGroupSpanClassColor(status)}></span> {status} ({board.tasks.filter(stat => stat.task_status === status).length})</h1>
                     {board.tasks.map((el, j) => el.task_status === status ? (
                       <div className='status-cards-container'>
@@ -99,7 +99,7 @@ function Temp() {
                         </div>
                       </div>                  
                     ) : null)}
-                  </>
+                  </div>
                 )
               })}
             </div>
