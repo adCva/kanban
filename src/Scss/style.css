@@ -793,8 +793,8 @@ $transition: all 0.25s ease-in-out;
 }
 @media (min-width: 1000px) {
   .tasks-wrapper .tasks-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
   }
 }
 .tasks-wrapper .tasks-container .status-group {
@@ -834,7 +834,7 @@ $transition: all 0.25s ease-in-out;
   background-color: #90cdbd;
 }
 .tasks-wrapper .tasks-container .status-group .task-card h1 .random-color-span {
-  background-color: rgb(29, 2, 152);
+  background-color: rgb(254, 157, 88);
 }
 .tasks-wrapper .tasks-container .status-group .task-card .status-cards-container {
   display: grid;
