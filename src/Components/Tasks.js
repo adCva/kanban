@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
+import { openAddTask } from "../Redux/ux";
 // ===== React Icons.
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { BiEdit } from "react-icons/bi";
@@ -70,7 +71,7 @@ function Temp() {
           </div>
 
           <div className='topbar-btns'>
-            <button className='add-btn'>+ Add New Task</button>
+            <button className='add-btn' onClick={() => dispatch(openAddTask())}>+ Add New Task</button>
             <div className='dropdown-wrapper' ref={dropdownRef} >
               <button className='mobile-menu' onClick={() => setIsDropdownActive(!isDropdownActive)} ><HiEllipsisVertical /></button>
               <div className={isDropdownActive ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleDarkTheme, hideSidebar, setActiveBoard, toggleAddTask } from "../Redux/ux";
+import { toggleDarkTheme, hideSidebar, setActiveBoard, openAddTask } from "../Redux/ux";
 // ===== React Icons.
 import { BiChevronUp, BiChevronDown, BiHide, BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
@@ -92,7 +92,7 @@ function Sidebar() {
                     <button className='open-btn' onClick={() => setIsMobileCard(!isMobileCard)}>{isMobileCard ? <BiChevronUp /> : <BiChevronDown />}</button>
                 </div>
                 <div className='mobile-btns'>
-                    <button className='mobile-add'><IoIosAdd /></button>
+                    <button className='mobile-add' onClick={() => dispatch(openAddTask())}><IoIosAdd /></button>
                     <div className='dropdown-wrapper' ref={mobilDropdownRef} >
                         <button className='mobile-menu' onClick={() => setIsDropdown(!isDropdown)} ><HiEllipsisVertical /></button>
                         <div className={isDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"}>

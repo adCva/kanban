@@ -24,14 +24,16 @@ export const ux = createSlice({
         setActiveBoard: (state, action) => {
             state.activeBoard = action.payload;
         },
-        toggleAddTask: (state) => {
-            console.log(state.isAddTask);
+        openAddTask: (state) => {
             state.isAddTask = true
+        },
+        closeAddTask: (state) => {
+            state.isAddTask = false
         }
     }
 });
 
 
-export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, toggleAddTask } = ux.actions;
+export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, openAddTask, closeAddTask } = ux.actions;
 
 export default ux.reducer;

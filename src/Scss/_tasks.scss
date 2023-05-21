@@ -41,13 +41,15 @@
             background-color: $ghost-white;
 
             .status-group {
-                .status-cards-container {
-                    .task-card {
-                        background-color: $white;
-                        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-                        &:hover {
-                            background-color: $alice-blue;
+                .task-card {
+                    .status-cards-container {
+                        .task-card {
+                            background-color: $white;
+                            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    
+                            &:hover {
+                                background-color: $alice-blue;
+                            }
                         }
                     }
                 }

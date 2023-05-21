@@ -1,123 +1,107 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
+import { closeAddTask } from "../Redux/ux";
 // ===== React Icons.
-import { HiEllipsisVertical } from "react-icons/hi2";
-import { BiEdit } from "react-icons/bi";
-import { TiDelete } from "react-icons/ti";
-
+import { RiDeleteBack2Line } from "react-icons/ri";
 
 function Temp() {
   const dispatch = useDispatch();
 
   // ===== Redux state.
+  const isAddTaskCardActive = useSelector((state) => state.ux.isAddTask);
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
-  const isSidebar = useSelector((state) => state.ux.isSidebarHidden);
-  const currentActiveBoard = useSelector((state) => state.ux.activeBoard);
-  const boardsTasks = useSelector((state) => state.boards.boards);
 
   // ===== Local state.
-  const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const [tasks, setTasks] = useState();
+  const [subtasks, setSubtasks] = useState([]);
+  const [subtaskPlaceholder, setSubtaskPlaceholder] = useState(["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"]);
 
-  // ===== Ref.
-  const dropdownRef = useRef(null);
+  // ===== React Spring Transition.
+  const transition = useTransition(isAddTaskCardActive, {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+  });
 
-  // ===== Close edit/delete dropdown.
-  const closeTasksDropdownOutsideClick = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownActive(false);
-    }
+  // ===== Add Subtask Field Input.
+  const addSubTaskInput = () => {
+    if (subtasks.length < 3) setSubtasks([...subtasks, {subtaskName: "", isComplete: false}])
   };
 
-  useEffect(() => {
-    document.addEventListener("click", closeTasksDropdownOutsideClick);
+  // ===== Delete Subtask Field Input.
+  const deleteSubtaskInput = (i) => {
+    let tempArray = [...subtasks];
+     tempArray.splice(i, 1);
+     setSubtasks([...tempArray]);
+  };
 
-    return () => {
-        document.removeEventListener("click", closeTasksDropdownOutsideClick);
+  // ===== Close addTask modal on outside click.
+  const closeAddTaskModalOutsideClick = (event) => {
+    if (isAddTaskCardActive && event.target.className === "add-task-wrapper") {
+      dispatch(closeAddTask());
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", closeAddTaskModalOutsideClick);
+
+    return() => {
+        document.removeEventListener("click", closeAddTaskModalOutsideClick);
     }
   });
 
 
   return (
-    <div className={isDarkTheme ? "tasks-wrapper" : "tasks-wrapper tasks-wrapper-light"} >
+    transition((style, isAddTaskCardActive) => isAddTaskCardActive ? (
+      <animated.div style={style} className={isAddTaskCardActive ? "add-task-wrapper" : "add-task-wrapper add-task-wrapper-hide"}>
+        <div className={isDarkTheme ? "add-task-container" : "add-task-container add-task-container-light"}>
 
-        {/* ===================== Top Bar, Only on Desktop ===================== */}
-        <div className='topbar-container'>
+          <h1>Add Task</h1>
 
-          <div className='topbar-info'>
-            <div className={isSidebar ? "topbar-logo" : "topbar-logo topbar-logo-hide"}>
-              <div className='line'></div>
-              <div className='line'></div>
-              <div className='line'></div>
+          <form className='add-form'>
+
+            <div className='form-group'>
+              <label>Title</label>
+              <input type='text' placeholder='e.g. Take coffe break' />
+              <p>This fiels is required.</p>
             </div>
-            <h3>{currentActiveBoard}</h3>
-          </div>
 
-          <div className='topbar-btns'>
-            <button className='add-btn'>+ Add New Board</button>
-            <div className='dropdown-wrapper' ref={dropdownRef} >
-              <button className='mobile-menu' onClick={() => setIsDropdownActive(!isDropdownActive)} ><HiEllipsisVertical /></button>
-              <div className={isDropdownActive ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
-                <button className='edit-board-btn'><BiEdit /> Edit Board</button>
-                <button className='delete-board-btn'><TiDelete /> Delete Board</button>
-              </div>
+            <div className='form-group'>
+              <label>Description</label>
+              <textarea placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little." ></textarea>
+              <p>This fiels is required.</p>
             </div>
-          </div>
+
+            <div className='subtasks-container'>
+              <label>Subtasks</label>
+              {subtasks ? subtasks.map((el, i) => {
+                return (
+                  <div key={i} className='subtask-interactive'>
+                    <input type='text' name='subtaskName' value={el.subtaskName} placeholder={subtaskPlaceholder[i]} />
+                    <button type='button' onClick={() => deleteSubtaskInput(i)} ><RiDeleteBack2Line /></button>
+                  </div>
+                )
+              }) : null}
+              <button type='button' onClick={addSubTaskInput} className='add-subtask-btn'>+ Add New Subtask</button>
+            </div>
+
+            <div className='form-group'>
+              <label>Status</label>
+              <select name="status" >
+                <option value="todo" selected>Todo</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+
+            <button type='submit'>Create Task</button>
+
+          </form>
 
         </div>
-
-        {/* ============= Tasks Content Container ============= */}
-        {boardsTasks.filter(board => board.name === currentActiveBoard).map((board, i) => board.tasks.length > 0 ? (
-          <div className='tasks-container' key={i}>
-
-            <div className='status-group'>
-              <h1><span className='todo-span'></span> To Do ({board.tasks.filter(stat => stat.task_status === "todo").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "todo" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-                </div>                  
-              ) : null)}
-            </div>
-
-            <div className='status-group'>
-              <h1><span className='doing-span'></span> Doing ({board.tasks.filter(stat => stat.task_status === "doing").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "doing" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-              </div>                  
-              ) : null)}
-            </div>
-
-            <div className='status-group'>
-              <h1><span className='done-span'></span> Done ({board.tasks.filter(stat => stat.task_status === "done").length})</h1>
-              {board.tasks.map((el, j) => el.task_status === "done" ? (
-                <div className='status-cards-container'>
-                  <div className='task-card' onClick={() => console.log(el)}>
-                    <h2>{el.task_title}</h2>
-                    <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
-                  </div>
-                </div>                  
-              ) : null)}              
-            </div>
-
-            <button className='add-column-btn'>+ New Column</button>
-
-          </div>
-        ) : (
-          <div className='tasks-container-empty'>
-            <h1>This board contains no tasks.</h1>
-            <button>Create Task</button>
-          </div>
-        ))}
-
-    </div>
+      </animated.div>
+    ) : null)
   )
 }
 
