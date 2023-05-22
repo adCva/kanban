@@ -111,7 +111,7 @@ function AddTask() {
                             {subtasks ? subtasks.map((el, i) => {
                                 return (
                                     <div key={i} className='subtask-interactive'>
-                                        <input type='text' name='subtaskName' value={el.subtaskName} placeholder={placeholder[i]} />
+                                        <input type='text' name='subtaskName' value={el.subtaskName} placeholder={placeholder[i]} onChange={() => console.log(el.subtaskName)} />
                                         <button type='button' onClick={() => deleteSubtaskInput(i)} ><RiDeleteBack2Line /></button>
                                     </div>
                                 )

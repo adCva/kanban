@@ -96,7 +96,7 @@ function Temp() {
                       <div className='status-cards-container'>
                         <div className='task-card' onClick={() => console.log([... new Set(board.tasks.map(status => status.task_status))].map(el => el))}>
                           <h2>{el.task_title}</h2>
-                          <p>{el.subtasks.filter(sub => sub.subtask_status === "complete").length} out of {el.subtasks.length}</p>
+                          <p>{el.subtasks.filter(sub => sub.isComplete === true).length} out of {el.subtasks.length}</p>
                         </div>
                       </div>                  
                     ) : null)}
