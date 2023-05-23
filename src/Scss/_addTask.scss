@@ -1,158 +1,202 @@
-// ============================================ Light Theme.
 .add-task-wrapper {
-    @extend %fixed-parent-el;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+
+    &.add-task-wrapper-hide {
+        display: none;
+    }
+
 
     .add-task-container {
-        background-color: $lt-sidebar-bg;
-        color: darken($lt-text-light, 20%);
-        @extend %padding;
+        background-color: $dark-grayish-blue;
+        display: flex;
+        flex-direction: column;
         min-width: 300px;
         max-width: 300px;
-        min-height: 400px;
         border-radius: 10px;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        cursor: pointer;
-        transition: $transition;
-
-
-        @media (min-width: 411px) {
-            min-width: 350px;
-            max-width: none;
-            min-height: 450px;
-        }
-
+        padding: 1.2rem 1.2rem;
 
         @media (min-width: 768px) {
-            min-height: 500px;
+            padding: 1.5rem 1.5rem;
         }
 
-
-        // ============= H1.
+        
         h1 {
-            font-size: 1.2rem;
-            font-weight: $font-bold;
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: $main-font-semi-bold;
+            color: lighten($gray, 30%);
+            @include colorTransition;
         }
 
 
-        // ============= Form.
         .add-form {
+            margin-top: 1rem;
             display: grid;
             gap: 1rem;
-            
 
-            // ============= Form Group.
+
             .form-group {
                 display: grid;
-                // gap: 1rem;
-
+                gap: 0.35rem;
 
                 label {
-                    margin-bottom: 0.4rem;
+                    font-size: 0.9rem;
                     letter-spacing: -0.3px;
-                } 
-
+                }
 
                 input {
-                    background-color: #e7e7e7;
+                    background: transparent;
+                    color: $medium-gray;
+                    font-size: 0.95rem;
                     padding: 0.3rem 0.4rem;
+                    border: 1px solid $medium-gray;
                     border-radius: 5px;
+                    outline: none;
                 }
-
 
                 textarea {
-                    background-color: #e7e7e7;
+                    background: transparent;
+                    color: $medium-gray;
+                    font-size: 0.95rem;
                     padding: 0.3rem 0.4rem;
-                    border-top-right-radius: 5px;
-                    border-top-left-radius: 5px;
-                    border-bottom-left-radius: 5px;
+                    border: 1px solid $medium-gray;
+                    border-radius: 5px;
+                    outline: none;
+                    min-height: 80px;
+                    max-height: 80px;
+                    max-width: calc(300px - 2.5rem);
                 }
-
-
-                p {
-                    color: red;
-                    font-size: 0.85rem;
-                    letter-spacing: -0.3px;
-                    margin-top: 0.3rem;
-                }
-
 
                 select {
-                    background-color: #e7e7e7;
+                    background: transparent;
+                    color: $medium-gray;
+                    font-size: 0.9rem;
                     padding: 0.3rem 0.4rem;
+                    border: 1px solid $medium-gray;
                     border-radius: 5px;
+                    outline: none;
+                }
+
+                .error {
+                    font-size: 0;
+                    color: $red;
+                    transform: scale(0);
+                    transform-origin: left;
+                    transition: transform 0.25s ease-in-out;
+                }
+
+                .error-show {
+                    transform: scale(1);
+                    font-size: 0.8rem;
                 }
             }
 
-
-            // ============= Subtasks Container.
             .subtasks-container {
                 display: grid;
                 gap: 0.5rem;
 
+                label {
+                    font-size: 0.9rem;
+                    letter-spacing: -0.3px;
+                }
 
                 .subtask-interactive {
                     display: flex;
+                    justify-content: space-between;
                     width: 100%;
 
-
                     input {
-                        background-color: #e7e7e7;
-                        padding: 0.2rem 0.4rem;
-                        border-top-left-radius: 5px;
-                        border-bottom-left-radius: 5px;
-                        width: 93%;
-                        margin-right: 0.7rem;
+                        background: transparent;
+                        color: $medium-gray;
+                        font-size: 0.9rem;
+                        padding: 0.3rem 0.5rem;
+                        border: 1px solid $medium-gray;
+                        border-radius: 5px;
+                        outline: none; 
+                        width: 89%;                       
                     }
-
 
                     button {
                         background-color: transparent;
-                        color: $dt-gray;
+                        color: $medium-gray;
                         font-size: 1.2rem;
                         display: flex;
                         align-items: center;
                     }
                 }
 
-
-
                 .add-subtask-btn {
-                    background-color: $lt-menu-hover;
-                    color: $lt-main-bg;
-                    padding: 0.7rem 0;
-                    border-radius: 10px;
+                    background-color: $almost-white;
+                    color: $dark-theme-purple;
+                    padding: 0.5rem 0;
+                    border-radius: 50px;
+                    font-size: 0.95rem;
                 }
             }
 
-
-
-            button {
-                background-color: $lt-menu-hover;
-                color: $lt-main-bg;
-                padding: 0.7rem 0;
-                border-radius: 10px;
+            .submit-btn {
+                background-color: $dark-theme-purple;
+                color: $almost-white;
+                padding: 0.6rem 0;
+                border-radius: 50px;
+                font-size: 0.95rem;
+                margin-top: 0.5rem;
             }
         }
-    }
-}
 
 
-// ============================================ Dark Theme.
-.add-task-wrapper-dark {
-    .add-task-container {
-        background-color: $dt-sidebar-bg;
-        color: $dt-text;
 
-        // ============= Subtasks Container.
-        .subtasks-container {
-            .subtask-interactive {
-                input {
-                    background-color: #e7e7e7;
+        // ================== Light Theme.
+        &.add-task-container-light {
+            background-color: $white;
+
+
+            h1 {
+                color: darken($gray, 30%);
+            }
+
+            .add-form {
+                .form-group {
+                    input {
+                        color: $black;
+                        border: 1px solid $black;
+                    }
+                    textarea {
+                        color: $black;
+                        border: 1px solid $black;
+                    }
+                    select {
+                        color: $black;
+                        border: 1px solid $black;
+                    }
                 }
 
-                button {
-                    color: #e7e7e7;
+
+                .subtasks-container {
+                    .add-subtask-btn {
+                        background-color: darken($ghost-white, 2%);
+                        // color: $white;
+                    }
+
+                    .subtask-interactive {
+                        input {
+                            color: $black;
+                            border: 1px solid $black;                
+                        }
+                    }
+                }
+
+                .submit-btn {
+                    background-color: $light-theme-purple;
+                    color: $white;
                 }
             }
         }

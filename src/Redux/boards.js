@@ -85,15 +85,28 @@ export const boards = createSlice({
     },
 
     reducers: {
+        createBoard: (state, action) => {
+            console.log("create board");
+        },
         addSubtask: (state, action) => {
-            let tempBoardsArray = [...state.boards];
-            console.log(state);
+            // let tempBoardsArray = state.boards.map(el => {return {...el}});
+            // let singleBoardObj = tempBoardsArray.filter(el => el.name === action.payload.boardName);
 
-            // .filter(el => el.name === action.payload.boardName;
+            let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
+            let singleBoardObj = tempBoardsArray.filter(el => el.name === action.payload.boardName);
+            let tempTasksArray = [...singleBoardObj[0].tasks, action.payload.objectData];
+
+            singleBoardObj[0].tasks = tempTasksArray
+            tempBoardsArray.splice(tempBoardsArray.indexOf(singleBoardObj[0]), 1, singleBoardObj[0]);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
         }
     }
 });
 
-export const { addSubtask } = boards.actions;
+export const { createBoard, addSubtask } = boards.actions;
 
 export default boards.reducer;

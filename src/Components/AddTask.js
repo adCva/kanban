@@ -1,139 +1,150 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
-import { RiDeleteBack2Line } from "react-icons/ri";
-// Redux.
+// ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleAddTask } from "../Redux/ux";
-
+import { closeAddTask } from "../Redux/ux";
+import { addSubtask } from "../Redux/boards";
+// ===== React Icons.
+import { MdClose } from "react-icons/md";
 
 function AddTask() {
-    const dispatch = useDispatch();
-    const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
-    const isAddTaskModal = useSelector((state) => state.ux.isAddTask);
-    // const [showModal, setShowModal] = useState(true);
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-    const [status, setStatus] = useState("todo");
-    const [subtasks, setSubtasks] = useState([]);
-    const [errorLocation, setErrorLocation] = useState("");
-    const [placeholder, setPlaceholder] = useState(["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"]);
+  const dispatch = useDispatch();
 
-    
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
+  // ===== Redux state.
+  const isAddTaskCardActive = useSelector((state) => state.ux.isAddTask);
+  const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
+  const activeBoard = useSelector((state) => state.ux.activeBoard);
+  const boards = useSelector((state) => state.boards.boards);
 
-        if (title === "" && desc === "") {
-            setErrorLocation("all");
-        } else if (title === "") {
-            setErrorLocation("title");
-        } else if (desc === "") {
-            setErrorLocation("desc");
-        } else {
-            const formData = {
-                title: title,
-                description: desc,
-                status: status,
-                subtasks: subtasks
-            };
+  // ===== Local state.
+  const [subtasks, setSubtasks] = useState([]);
+  const subtaskPlaceholder = ["e.g. Drik coffee.", "e.g. Cope with life absurdity.", "e.g. Stare into the abyss"];
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [status, setStatus] = useState("to do");
 
-            console.log(formData);
-        }
-    };
+  // ===== React Spring Transition.
+  const transition = useTransition(isAddTaskCardActive, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
 
-    const addSubTaskInput = () => {
-        if (subtasks.length < 3) setSubtasks([...subtasks, {subtaskName: "", isComplete: false}])
-    };
+  // ===== Add Subtask Field Input.
+  const addSubTaskInput = () => {
+    if (subtasks.length < 3) setSubtasks([...subtasks, {subtask_name: "", isComplete: false}])
+  };
+
+  // ===== Edit Subtask Field Input.
+  const addInputText = (i, event) => {
+    let tempArray = [...subtasks];
+    let tempFile = tempArray[i];
+    let tempInput = event.target.value
+    tempFile.subtask_name = tempInput
+
+    tempArray.splice(i, 1, tempFile);
+    setSubtasks([...tempArray]);
+  }
+
+  // ===== Delete Subtask Field Input.
+  const deleteSubtaskInput = (i) => {
+    let tempArray = [...subtasks];
+    tempArray.splice(i, 1);
+    setSubtasks([...tempArray]);
+  };
+
+  // ===== Close addTask modal on outside click.
+  const closeAddTaskModalOutsideClick = (event) => {
+    if (isAddTaskCardActive && event.target.className === "add-task-wrapper") {
+      dispatch(closeAddTask());
+    }
+  }
+
+  // ===== Handle form submit.
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let formData = {
+      task_title: title,
+      task_desc: desc,
+      task_status: status,
+      subtasks: [...subtasks]
+    }
+
+    dispatch(addSubtask({boardName: activeBoard, objectData: formData}));
+    resetData();
+    dispatch(closeAddTask());
+  }
+
+  // ===== Reset local state.
+  const resetData = () => {
+    setTitle("");
+    setSubtasks([]);
+    setDesc("");
+    setStatus("to do");
+  }
+
+  // ===== Use Effect.
+  useEffect(() => {
+    document.addEventListener("click", closeAddTaskModalOutsideClick);
+
+    return() => {
+      document.removeEventListener("click", closeAddTaskModalOutsideClick);
+    }
+  });
 
 
-    const deleteSubtaskInput = (i) => {
-       let tempArray = [...subtasks];
-        tempArray.splice(i, 1);
-        setSubtasks([...tempArray]);
-    };
+  return (
+    transition((style, isAddTaskCardActive) => isAddTaskCardActive ? (
+      <animated.div style={style} className={isAddTaskCardActive ? "add-task-wrapper" : "add-task-wrapper add-task-wrapper-hide"}>
+        <div className={isDarkTheme ? "add-task-container" : "add-task-container add-task-container-light"}>
 
+          <h1>Add Task</h1>
 
-    const handleSubtaskInput = (e, i) => {
-        let tempArray = [...subtasks];
-        let el = tempArray[i];
-        el.subtaskName = e.target.value;
-        tempArray.splice(i, 1, el);
-        setSubtasks([...tempArray]);
-    };
+          <form className='add-form' onSubmit={handleSubmit}>
 
+            <div className='form-group'>
+              <label>Title</label>
+              <input type='text' placeholder='e.g. Take coffe break' onChange={(e) => setTitle(e.target.value)} />
+              <p className='error'>This fiels is required.</p>
+            </div>
 
-    const closeModalOutsideClick = (event) => {
-        //console.log(event.target.className);
-        if (isAddTaskModal && event.target.className === "add-task-wrapper" || event.target.className === "add-task-wrapper add-task-wrapper-dark") {
-            // setShowModal(false);
-            dispatch(toggleAddTask());
-            //console.log("outside click");
-        }
-    };
+            <div className='form-group'>
+              <label>Description</label>
+              <textarea placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little." onChange={(e) => setDesc(e.target.value)} ></textarea>
+              <p className='error'>This fiels is required.</p>
+            </div>
 
+            <div className='subtasks-container'>
+              <label>Subtasks</label>
+              {subtasks ? subtasks.map((el, i) => {
+                return (
+                  <div key={i} className='subtask-interactive'>
+                    <input type='text' name='subtaskName'  placeholder={subtaskPlaceholder[i]} onChange={(e) => addInputText(i, e)} />
+                    <button type='button' onClick={() => deleteSubtaskInput(i)} ><MdClose /></button>
+                  </div>
+                )
+              }) : null}
+              <button type='button' onClick={addSubTaskInput} className='add-subtask-btn'>+ Add New Subtask</button>
+            </div>
 
-    const transition = useTransition(isAddTaskModal, {
-        from: { opacity: 0 },
-        enter: { opacity: 1 },
-        leave: { opacity: 0 },
-    });  
+            <div className='form-group'>
+              <label>Status</label>
+              <select name="status" onChange={(e) => setStatus(e.target.value)} >
+                <option value="to do" selected>Todo</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
 
+            <button type='submit' className='submit-btn'>Create Task</button>
 
-    useEffect(() => {
-        document.addEventListener("click", closeModalOutsideClick);
+          </form>
 
-        return() => {
-            document.removeEventListener("click", closeModalOutsideClick);
-        }
-    });
-
-
-    return (
-        transition((style, isAddTaskModal) => isAddTaskModal ? (
-            <animated.div style={style} className={isDarkTheme ? "add-task-wrapper add-task-wrapper-dark" : "add-task-wrapper"}>
-                <div className='add-task-container'>
-                    <h1>Add Task</h1>
-                    <form className='add-form'>
-
-                        <div className='form-group'>
-                            <label>Title</label>
-                            <input type='text' placeholder='e.g. Take coffe break' onChange={(e) => setTitle(e.target.value)} />
-                            <p>This fiels is required.</p>
-                        </div>
-
-                        <div className='form-group'>
-                            <label>Description</label>
-                            <textarea placeholder="e.g. It's always good to take a break. This 15 minutes break will recharge the batteries a little." onChange={(e) => setDesc(e.target.value)} ></textarea>
-                            <p>This fiels is required.</p>
-                        </div>
-
-                        <div className='subtasks-container'>
-                            <label>Subtasks</label>
-                            {subtasks ? subtasks.map((el, i) => {
-                                return (
-                                    <div key={i} className='subtask-interactive'>
-                                        <input type='text' name='subtaskName' value={el.subtaskName} placeholder={placeholder[i]} onChange={() => console.log(el.subtaskName)} />
-                                        <button type='button' onClick={() => deleteSubtaskInput(i)} ><RiDeleteBack2Line /></button>
-                                    </div>
-                                )
-                            }) : null}
-                            <button type='button' onClick={addSubTaskInput} className='add-subtask-btn'>+ Add New Subtask</button>
-                        </div>
-
-                        <div className='form-group'>
-                            <label>Status</label>
-                            <select name="status" onChange={(e) => setStatus(e.target.value)} >
-                                <option value="todo" selected>Todo</option>
-                                <option value="doing">Doing</option>
-                                <option value="done">Done</option>
-                            </select>
-                        </div>
-
-                        <button type='submit'>Create Task</button>
-                    </form>
-                </div>
-            </animated.div>
-        ) : null)
-    )
+        </div>
+      </animated.div>
+    ) : null)
+  )
 }
 
 export default AddTask;

@@ -34,7 +34,7 @@ function Temp() {
 
   // ===== Decide task status group span class color.
   const decideStatusGroupSpanClassColor = (status) => {
-    if (status === "to do") {
+    if (status === "to do" || status === "todo") {
       return "todo-span";
     } else if (status === "doing") {
       return "doing-span";

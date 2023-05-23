@@ -6,7 +6,8 @@ export const ux = createSlice({
         isDarkTheme: true,
         isSidebarHidden: false,
         activeBoard: "Platform Launch",
-        isAddTask: false
+        isAddTask: false,
+        isNewBoardPopup: false
     },
 
     reducers: {

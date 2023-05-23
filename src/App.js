@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import Sidebar from './Components/Sidebar';
 import ShowSidebar from './Components/ShowSidebar';
 import Tasks from './Components/Tasks';
+import AddTask from './Components/AddTask';
+import NewBoard from './Components/NewBoard';
 import Temp from './Components/Temp';
 
 
@@ -22,7 +24,8 @@ function App() {
         </div>
         <div className='main-content'>
           <Tasks />
-          <Temp />
+          <AddTask />
+          <NewBoard />
         </div>
   
       </div>

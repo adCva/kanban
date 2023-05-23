@@ -3,6 +3,7 @@ import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkTheme, hideSidebar, setActiveBoard, openAddTask } from "../Redux/ux";
+import { createBoard } from "../Redux/boards";
 // ===== React Icons.
 import { BiChevronUp, BiChevronDown, BiHide, BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
@@ -119,7 +120,7 @@ function Sidebar() {
                                 })}
                             </div>
 
-                            <button className='new-board-btn'><span><BsClipboard2Plus /></span>+ Create New Board</button>
+                            <button className='new-board-btn' onClick={() => dispatch(createBoard())}><span><BsClipboard2Plus /></span>+ Create New Board</button>
                         </div>
 
 
