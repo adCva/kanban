@@ -111,7 +111,7 @@ function Temp() {
         ) : (
           <div className='tasks-container-empty'>
             <h1>This board contains no tasks.</h1>
-            <button>Create Task</button>
+            <button onClick={() => dispatch(openAddTask())}>Create Task</button>
           </div>
         ))}
 

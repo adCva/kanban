@@ -3,6 +3,7 @@ import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { closeAddTask } from "../Redux/ux";
+import { addSubtask } from "../Redux/boards";
 // ===== React Icons.
 import { MdClose } from "react-icons/md";
 
@@ -12,6 +13,8 @@ function Temp() {
   // ===== Redux state.
   const isAddTaskCardActive = useSelector((state) => state.ux.isAddTask);
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
+  const activeBoard = useSelector((state) => state.ux.activeBoard);
+  const boards = useSelector((state) => state.boards.boards);
 
   // ===== Local state.
   const [subtasks, setSubtasks] = useState([]);
@@ -22,9 +25,9 @@ function Temp() {
 
   // ===== React Spring Transition.
   const transition = useTransition(isAddTaskCardActive, {
-      from: { opacity: 0 },
-      enter: { opacity: 1 },
-      leave: { opacity: 0 },
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
   });
 
   // ===== Add Subtask Field Input.
@@ -68,15 +71,23 @@ function Temp() {
       subtasks: [...subtasks]
     }
 
-    console.log(formData);
+    let tempBoardsArray = boards.filter(el => el.name === activeBoard)[0];
+    let x = [...tempBoardsArray.tasks, formData];
+    tempBoardsArray.tasks = x;
+
+
+    console.log(x)
+
+
+    dispatch(addSubtask({boardName: activeBoard, objectData: formData}));
   }
 
-
+  // ===== Use Effect.
   useEffect(() => {
     document.addEventListener("click", closeAddTaskModalOutsideClick);
 
     return() => {
-        document.removeEventListener("click", closeAddTaskModalOutsideClick);
+      document.removeEventListener("click", closeAddTaskModalOutsideClick);
     }
   });
 

@@ -834,7 +834,7 @@ $transition: all 0.25s ease-in-out;
   background-color: #90cdbd;
 }
 .tasks-wrapper .tasks-container .status-group .task-card h1 .random-color-span {
-  background-color: rgb(201, 186, 128);
+  background-color: rgb(28, 37, 177);
 }
 .tasks-wrapper .tasks-container .status-group .task-card .status-cards-container {
   display: grid;

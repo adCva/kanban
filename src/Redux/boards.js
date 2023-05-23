@@ -85,10 +85,15 @@ export const boards = createSlice({
     },
 
     reducers: {
+        addSubtask: (state, action) => {
+            let tempBoardsArray = [...state.boards];
+            console.log(state);
 
+            // .filter(el => el.name === action.payload.boardName;
+        }
     }
 });
 
-export const {  } = boards.actions;
+export const { addSubtask } = boards.actions;
 
 export default boards.reducer;
