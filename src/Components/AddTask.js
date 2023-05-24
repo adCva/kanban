@@ -14,7 +14,7 @@ function AddTask() {
   const isAddTaskCardActive = useSelector((state) => state.ux.isAddTask);
   const isDarkTheme = useSelector((state) => state.ux.isDarkTheme);
   const activeBoard = useSelector((state) => state.ux.activeBoard);
-  const boards = useSelector((state) => state.boards.boards);
+  const boards = useSelector((state) => state.boards.boards.filter(el => el.name === activeBoard)[0]);
 
   // ===== Local state.
   const [subtasks, setSubtasks] = useState([]);
@@ -99,7 +99,7 @@ function AddTask() {
       <animated.div style={style} className={isAddTaskCardActive ? "add-task-wrapper" : "add-task-wrapper add-task-wrapper-hide"}>
         <div className={isDarkTheme ? "add-task-container" : "add-task-container add-task-container-light"}>
 
-          <h1>Add Task</h1>
+          <h1 onClick={() => console.log(boards.avaiableStatuses)}>Add Task</h1>
 
           <form className='add-form' onSubmit={handleSubmit}>
 
@@ -131,9 +131,11 @@ function AddTask() {
             <div className='form-group'>
               <label>Status</label>
               <select name="status" onChange={(e) => setStatus(e.target.value)} >
-                <option value="to do" selected>Todo</option>
-                <option value="doing">Doing</option>
-                <option value="done">Done</option>
+                {boards.avaiableStatuses.map((el, i) => {
+                  return (
+                    <option key={i} value={el}>{el}</option>
+                  )
+                })}
               </select>
             </div>
 

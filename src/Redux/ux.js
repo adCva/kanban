@@ -7,7 +7,8 @@ export const ux = createSlice({
         isSidebarHidden: false,
         activeBoard: "Platform Launch",
         isAddTask: false,
-        isNewBoardPopup: false
+        isNewBoardPopup: false,
+        editBoardPop: false
     },
 
     reducers: {
@@ -30,11 +31,26 @@ export const ux = createSlice({
         },
         closeAddTask: (state) => {
             state.isAddTask = false
+        },
+        openNewBoardPop: (state) => {
+            state.isNewBoardPopup = true;
+        },
+        closeNewBoardPop: (state) => {
+            state.isNewBoardPopup = false;
+        },
+        openEdit: (state) => {
+            state.editBoardPop = true;
+        },
+        closeEdit: (state) => {
+            state.editBoardPop = false;
+        },
+        updateCurrentBoard: (state, action) => {
+            state.activeBoard = action.payload.newName;
         }
     }
 });
 
 
-export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, openAddTask, closeAddTask } = ux.actions;
+export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, openAddTask, closeAddTask, openNewBoardPop, closeNewBoardPop, openEdit, closeEdit, updateCurrentBoard } = ux.actions;
 
 export default ux.reducer;

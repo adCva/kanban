@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleDarkTheme, hideSidebar, setActiveBoard, openAddTask } from "../Redux/ux";
-import { createBoard } from "../Redux/boards";
+import { toggleDarkTheme, hideSidebar, setActiveBoard, openAddTask, openNewBoardPop, openEdit } from "../Redux/ux";
 // ===== React Icons.
 import { BiChevronUp, BiChevronDown, BiHide, BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
@@ -97,7 +96,7 @@ function Sidebar() {
                     <div className='dropdown-wrapper' ref={mobilDropdownRef} >
                         <button className='mobile-menu' onClick={() => setIsDropdown(!isDropdown)} ><HiEllipsisVertical /></button>
                         <div className={isDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"}>
-                            <button className='edit-board-btn'><BiEdit /> Edit Board</button>
+                            <button className='edit-board-btn' onClick={() => dispatch(openEdit())}><BiEdit /> Edit Board</button>
                             <button className='delete-board-btn'><TiDelete /> Delete Board</button>
                         </div>
                     </div>
@@ -120,7 +119,7 @@ function Sidebar() {
                                 })}
                             </div>
 
-                            <button className='new-board-btn' onClick={() => dispatch(createBoard())}><span><BsClipboard2Plus /></span>+ Create New Board</button>
+                            <button className='new-board-btn' onClick={() => dispatch(openNewBoardPop())}><span><BsClipboard2Plus /></span>+ Create New Board</button>
                         </div>
 
 

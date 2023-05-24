@@ -8,6 +8,8 @@ import Tasks from './Components/Tasks';
 import AddTask from './Components/AddTask';
 import NewBoard from './Components/NewBoard';
 import Temp from './Components/Temp';
+import EditBoard from './Components/EditBoard';
+import TaskDetails from './Components/TaskDetails';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Tasks />
           <AddTask />
           <NewBoard />
+          <EditBoard />
+          <TaskDetails />
         </div>
   
       </div>

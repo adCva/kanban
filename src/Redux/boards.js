@@ -6,6 +6,7 @@ export const boards = createSlice({
         boards: [
             {
                 name: "Platform Launch",
+                avaiableStatuses: ["todo", "doing", "done"],
                 tasks: [
                     {
                         task_title: "Build UI for onboarding flow",
@@ -44,6 +45,7 @@ export const boards = createSlice({
             },
             {
                 name: "Marketing Plan",
+                avaiableStatuses: ["todo", "doing", "done", "future"],
                 tasks: [
                     {
                         task_title: "Build UI for onboarding",
@@ -79,6 +81,7 @@ export const boards = createSlice({
             },
             {
                 name: "Roadmap",
+                avaiableStatuses: ["todo", "doing", "done", "future", "ideas"],
                 tasks: []
             }
         ]
@@ -86,12 +89,30 @@ export const boards = createSlice({
 
     reducers: {
         createBoard: (state, action) => {
-            console.log("create board");
+            let tempBoardsArray = [...state.boards];
+            tempBoardsArray.push(action.payload.newBoard);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
+        },
+        editBoard: (state, action) => {
+            
+            let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
+            let boardToEdit = tempBoardsArray.filter(el => el.name === action.payload.originalName);
+
+            boardToEdit[0].name = action.payload.editedName;
+            boardToEdit[0].avaiableStatuses = action.payload.avaiableStatuses;
+
+            tempBoardsArray.splice(tempBoardsArray.indexOf(boardToEdit[0]), 1, boardToEdit[0]);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
         },
         addSubtask: (state, action) => {
-            // let tempBoardsArray = state.boards.map(el => {return {...el}});
-            // let singleBoardObj = tempBoardsArray.filter(el => el.name === action.payload.boardName);
-
             let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
             let singleBoardObj = tempBoardsArray.filter(el => el.name === action.payload.boardName);
             let tempTasksArray = [...singleBoardObj[0].tasks, action.payload.objectData];
@@ -103,10 +124,10 @@ export const boards = createSlice({
                 ...state,
                 boards: tempBoardsArray
             }
-        }
+        },
     }
 });
 
-export const { createBoard, addSubtask } = boards.actions;
+export const { createBoard, editBoard, addSubtask } = boards.actions;
 
 export default boards.reducer;
