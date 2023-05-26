@@ -20,7 +20,7 @@ function EditBoard() {
     const board = useSelector((state) => state.boards.boards.filter(el => el.name === currentActiveBoard)[0]);
 
     
-    const containsSubtasks = {};
+    let containsSubtasks = {};
     board.tasks.forEach(task => {
         const status = task.task_status;
         containsSubtasks[status] = (containsSubtasks[status] || 0) + 1;
@@ -80,12 +80,14 @@ function EditBoard() {
 
     // ===== Use Effect.
     useEffect(() => {
+        setName(currentActiveBoard);
+        
         document.addEventListener("click", closeAddTaskModalOutsideClick);
 
         return() => {
         document.removeEventListener("click", closeAddTaskModalOutsideClick);
         }
-    });
+    }, []);
     
 
     return (
@@ -93,7 +95,7 @@ function EditBoard() {
             <animated.div style={style} className={isEditBoardPopup ? "edit-board-wrapper" : "edit-board-wrapper edit-board-wrapper-hide"}>
                 <div className={isDarkTheme ? "edit-board-container" : "edit-board-container edit-board-container-light"}>
                     
-                    <h1 onClick={() => console.log(name)}>Edit Board</h1>
+                    <h1 onClick={() => console.log(currentActiveBoard, name)}>Edit Board</h1>
 
                     <form className='edit-board-form' onSubmit={handleSubmit}>
 

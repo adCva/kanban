@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
-import { openAddTask, openEdit } from "../Redux/ux";
+import { openAddTask, openEdit, updateShowDetailsFor, toggleDetailsPopActive } from "../Redux/ux";
 // ===== React Icons.
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { BiEdit } from "react-icons/bi";
@@ -43,6 +43,12 @@ function Temp() {
     } else {
       return "random-color-span";
     }
+  }
+
+
+  const openDetails = (name, id) => {
+    dispatch(updateShowDetailsFor({board: name, id: id}));
+    dispatch(toggleDetailsPopActive());
   }
 
 
@@ -93,7 +99,7 @@ function Temp() {
                   <div className='task-card'>
                     <h1><span className={decideStatusGroupSpanClassColor(status)}></span> {status} ({board.tasks.filter(stat => stat.task_status === status).length})</h1>
                     {board.tasks.map((el, j) => el.task_status === status ? (
-                      <div className='status-cards-container'>
+                      <div className='status-cards-container' onClick={() => openDetails(board.task_title, j)} >
                         <div className='task-card' onClick={() => console.log([... new Set(board.tasks.map(status => status.task_status))].map(el => el))}>
                           <h2>{el.task_title}</h2>
                           <p>{el.subtasks.filter(sub => sub.isComplete === true).length} out of {el.subtasks.length}</p>

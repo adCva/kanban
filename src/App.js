@@ -28,8 +28,7 @@ function App() {
           <Tasks />
           <AddTask />
           <NewBoard />
-          <EditBoard />
-          <TaskDetails />
+          <Temp />
         </div>
   
       </div>
