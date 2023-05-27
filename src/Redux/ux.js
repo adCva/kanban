@@ -59,13 +59,15 @@ export const ux = createSlice({
             }
         },
         toggleDetailsPopActive: (state) => {
-            let newValue = state.isDetailsPopActive ? false: true
-            state.isDetailsPopActive = newValue;
+            state.isDetailsPopActive = true;
+        },
+        closeDetailsTask: (state) => {
+            state.isDetailsPopActive = false;
         }
     }
 });
 
 
-export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, openAddTask, closeAddTask, openNewBoardPop, closeNewBoardPop, openEdit, closeEdit, updateCurrentBoard, updateShowDetailsFor, toggleDetailsPopActive } = ux.actions;
+export const { toggleDarkTheme, hideSidebar, showSidebar, setActiveBoard, openAddTask, closeAddTask, openNewBoardPop, closeNewBoardPop, openEdit, closeEdit, updateCurrentBoard, updateShowDetailsFor, toggleDetailsPopActive, closeDetailsTask } = ux.actions;
 
 export default ux.reducer;

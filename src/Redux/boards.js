@@ -125,9 +125,57 @@ export const boards = createSlice({
                 boards: tempBoardsArray
             }
         },
+        updateSubtasks: (state, action) => {
+            let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
+            let singleBoardObj = tempBoardsArray.filter(el => el.name === action.payload.changeBoard);
+  
+            let objectToBeChanged = singleBoardObj[0].tasks.map(item => {
+                if (item.task_title === action.payload.newObj.task_title) {
+                    return {
+                        task_title: action.payload.newObj.task_title,
+                        task_desc: action.payload.newObj.task_desc,
+                        task_status: action.payload.newObj.task_status,
+                        subtasks: [...action.payload.newObj.subtasks]
+                    }
+                }
+                return item;
+            })
+
+            singleBoardObj[0].tasks = [...objectToBeChanged];
+            tempBoardsArray.splice(tempBoardsArray.indexOf(singleBoardObj[0]), 1, singleBoardObj[0]);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
+
+        },
+        deleteBoard: (state, action) => {
+            let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
+            let deleteBoardObj = tempBoardsArray.filter(el => el.name === action.payload.board);
+
+            tempBoardsArray.splice(tempBoardsArray.indexOf(deleteBoardObj[0]), 1);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
+        },  
+        deleteSubtask: (state, action) => {
+            let tempBoardsArray = JSON.parse(JSON.stringify(state.boards));
+            let deleteBoardObj = tempBoardsArray.filter(el => el.name === action.payload.deleteFromBoard);
+            
+            deleteBoardObj[0].tasks.splice(action.payload.index, 1);
+            tempBoardsArray.splice(tempBoardsArray.indexOf(deleteBoardObj[0]), 1, deleteBoardObj[0]);
+
+            return {
+                ...state,
+                boards: tempBoardsArray
+            }
+        }
     }
 });
 
-export const { createBoard, editBoard, addSubtask } = boards.actions;
+export const { createBoard, editBoard, addSubtask, updateSubtasks, deleteBoard, deleteSubtask } = boards.actions;
 
 export default boards.reducer;

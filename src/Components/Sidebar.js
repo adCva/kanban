@@ -3,6 +3,7 @@ import { useTransition, animated } from '@react-spring/web';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkTheme, hideSidebar, setActiveBoard, openAddTask, openNewBoardPop, openEdit } from "../Redux/ux";
+import { deleteBoard } from "../Redux/boards";
 // ===== React Icons.
 import { BiChevronUp, BiChevronDown, BiHide, BiEdit } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
@@ -67,6 +68,11 @@ function Sidebar() {
     };
 
 
+    const deleteBrd = () => {
+        dispatch(deleteBoard({board: currentActiveBoard}));
+    }
+
+
     useEffect(() => {
         document.addEventListener("click", closeBoardModalOutsideClick);
         document.addEventListener("click", closeDropdownOutsideClick);
@@ -97,7 +103,7 @@ function Sidebar() {
                         <button className='mobile-menu' onClick={() => setIsDropdown(!isDropdown)} ><HiEllipsisVertical /></button>
                         <div className={isDropdown ? "dropdown-container" : "dropdown-container dropdown-container-hide"}>
                             <button className='edit-board-btn' onClick={() => dispatch(openEdit())}><BiEdit /> Edit Board</button>
-                            <button className='delete-board-btn'><TiDelete /> Delete Board</button>
+                            <button className='delete-board-btn' onClick={() => deleteBrd()}><TiDelete /> Delete Board</button>
                         </div>
                     </div>
                 </div>

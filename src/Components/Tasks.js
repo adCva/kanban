@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 // ===== Redux.
 import { useSelector, useDispatch } from 'react-redux';
 import { openAddTask, openEdit, updateShowDetailsFor, toggleDetailsPopActive } from "../Redux/ux";
+import { deleteBoard } from "../Redux/boards";
 // ===== React Icons.
 import { HiEllipsisVertical } from "react-icons/hi2";
 import { BiEdit } from "react-icons/bi";
 import { TiDelete } from "react-icons/ti";
+import Temp from "./Temp";
 
 
-function Temp() {
+function Tasks() {
   const dispatch = useDispatch();
 
   // ===== Redux state.
@@ -20,6 +22,7 @@ function Temp() {
   // ===== Local state.
   const [isDropdownActive, setIsDropdownActive] = useState(false);
   const [tasks, setTasks] = useState();
+  const [selectedObject, setSelectedObject] = useState(null);
 
   // ===== Ref.
   const dropdownRef = useRef(null);
@@ -46,10 +49,21 @@ function Temp() {
   }
 
 
-  const openDetails = (name, id) => {
-    dispatch(updateShowDetailsFor({board: name, id: id}));
+  const openDetails = (el, board, index) => {
+    const detailsObject = {
+      main: el,
+      statuses: board.avaiableStatuses,
+      index: index
+    }
+    setSelectedObject(detailsObject);
     dispatch(toggleDetailsPopActive());
   }
+
+
+  
+  const deleteBrd = () => {
+    dispatch(deleteBoard({board: currentActiveBoard}));
+}
 
 
   useEffect(() => {
@@ -82,7 +96,7 @@ function Temp() {
               <button className='mobile-menu' onClick={() => setIsDropdownActive(!isDropdownActive)} ><HiEllipsisVertical /></button>
               <div className={isDropdownActive ? "dropdown-container" : "dropdown-container dropdown-container-hide"} >
                 <button className='edit-board-btn' onClick={() => dispatch(openEdit())}><BiEdit /> Edit Board</button>
-                <button className='delete-board-btn'><TiDelete /> Delete Board</button>
+                <button className='delete-board-btn' onClick={() => deleteBrd()}><TiDelete /> Delete Board</button>
               </div>
             </div>
           </div>
@@ -99,8 +113,8 @@ function Temp() {
                   <div className='task-card'>
                     <h1><span className={decideStatusGroupSpanClassColor(status)}></span> {status} ({board.tasks.filter(stat => stat.task_status === status).length})</h1>
                     {board.tasks.map((el, j) => el.task_status === status ? (
-                      <div className='status-cards-container' onClick={() => openDetails(board.task_title, j)} >
-                        <div className='task-card' onClick={() => console.log([... new Set(board.tasks.map(status => status.task_status))].map(el => el))}>
+                      <div className='status-cards-container' onClick={() => openDetails(el, board, j)} >
+                        <div className='task-card'>
                           <h2>{el.task_title}</h2>
                           <p>{el.subtasks.filter(sub => sub.isComplete === true).length} out of {el.subtasks.length}</p>
                         </div>
@@ -121,8 +135,11 @@ function Temp() {
           </div>
         ))}
 
+
+        {selectedObject && <Temp object={selectedObject} />}
+
     </div>
   )
 }
 
-export default Temp;
+export default Tasks;
